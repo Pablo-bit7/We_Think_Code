@@ -42,3 +42,14 @@
 Run the unit tests for each feature:  
 ```bash
 python3 -m unittest test_<feature_name>.py
+
+---
+
+### 5. Limitations
+- File and function names are predefined and must not be altered.
+- Features are implemented as standalone modules, focusing on the internal processes for bootcamp management.
+
+---
+
+### 6. Acknowledgements
+This project is part of the curriculum at **WTC** (**WeThinkCode_**). Special thanks to mentors and peers for their guidance and support.

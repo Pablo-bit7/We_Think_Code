@@ -42,6 +42,7 @@
 Run the unit tests for each feature:  
 ```bash
 python3 -m unittest test_<feature_name>.py
+```
 
 ---
 

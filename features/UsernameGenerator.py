@@ -74,11 +74,26 @@ def create_user_name(first_name, last_name, cohort, final_campus):
     """
     Create and return a valid username
     """
-    
-    #return (username)
+
+    if len(first_name) < 3:
+        first_name = first_name + "O"
+    if len(last_name) < 3:
+        last_name = last_name + "O"
+
+    user_name = f"{first_name[-3:].lower()}{last_name[0:3].lower()}{final_campus}{cohort}"
+
+    print(
+        f"\nFirst Name: {first_name}\n"
+        f"Last Name: {last_name}\n"
+        f"Cohort Year: {cohort}\n"
+        f"Campus: {final_campus}\n"
+    )
+    print(f"Your username: {user_name}")
+
+    return (user_name)
 
 
 if __name__ == '__main__':
     first_name, last_name, cohort, campus = user_details()
     final_campus = user_campus(campus)
-    #create_user_name(first_name, last_name, cohort, final_campus)
+    create_user_name(first_name, last_name, cohort, final_campus)

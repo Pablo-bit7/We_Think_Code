@@ -4,7 +4,7 @@ import sys
 import unittest
 from unittest.mock import patch
 
-from UsernameGenerator import create_user_name, user_campus, user_details
+from features.UsernameGenerator import create_user_name, user_campus, user_details
 
 class username_generator_test(unittest.TestCase):
     @patch("sys.stdin", StringIO("Chand1er\nChandler\nJacobs\n2023\nDurban"))

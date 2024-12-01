@@ -64,7 +64,7 @@ huaove2022PHO\n""")
 
 
     @patch("sys.stdin", StringIO("Sandiselwe\nZwane\n2026\nPretoria\nJohannesburg"))
-    def test_invalid_cohort(self):
+    def test_invalid_campus(self):
         """
             Testing invalid prompt for campus
         """

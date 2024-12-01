@@ -9,7 +9,7 @@ def user_details():
     """
 
     while True:
-        first_name = input("Enter your first name: ")
+        first_name = input("Insert your first name: ")
         if first_name.isalpha():
             break
         else:
@@ -43,9 +43,19 @@ def user_details():
             print()
 
     while True:
-        campuses = ['Johannesburg', 'Cape Town', 'Durban', 'Phokeng']
+        campuses = [
+            'Johannesburg',
+            'johannesburg',
+            'Cape Town',
+            'cape town',
+            'Durban',
+            'durban',
+            'Phokeng',
+            'phokeng'
+            ]
         campus = input("Enter your cohort's campus: ")
         if campus in campuses:
+            campus = campus.lower()
             break
         else:
             print("Please provide a valid campus.")
@@ -60,10 +70,10 @@ def user_campus(campus):
     """
 
     campusdict = {
-        'Johannesburg': 'JHB',
-        'Cape Town': 'CPT',
-        'Durban': 'DBN',
-        'Phokeng': 'PHO'
+        'johannesburg': 'JHB',
+        'cape town': 'CPT',
+        'durban': 'DBN',
+        'phokeng': 'PHO'
     }
 
     final_campus = campusdict[campus]

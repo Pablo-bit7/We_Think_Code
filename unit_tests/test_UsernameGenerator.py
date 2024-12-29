@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 from datetime import date
 from io import StringIO
 import unittest
@@ -13,51 +14,51 @@ class username_generator_test(unittest.TestCase):
         Helper method to test user_details function with provided inputs
         and verify the output matches expectations.
         """
-        with patch("sys.stdin", StringIO("\n".join(inputs))), patch("sys.stdout", new_callable=StringIO) as output:
+        with patch("sys.stdin", StringIO("\n".join(input))), patch("sys.stdout", new_callable=StringIO) as output:
             user_details()
             self.assertEqual(output.getvalue(), expected_output)
 
     def test_invalid_name(self):
         """Test invalid input for first name."""
-        inputs = ["Chand1er", "Chandler", "Jacobs", "2023", "Durban"]
+        inputs = ["Chand1er", "Chandler", "Jacobs", "2024", "Durban"]
         expected_output = (
-            "Insert your first name\n"
-            "Invalid first name\n"
-            "Insert your first name\n"
-            "Insert your last name\n"
-            "Insert your cohort\n"
-            "Insert the campus you will be attending in\n"
-            "lerjac2023DBN\n"
+            "Insert your first name:\n"
+            "Invalid first name. Names should not contain digits or special characters.\n"
+            "Insert your first name:\n"
+            "Insert your last name:\n"
+            "Insert your cohort:\n"
+            "Insert the campus you will be attending in:\n"
+            "lerjac2024DBN\n"
         )
         self.run_user_details_test(inputs, expected_output)
 
     def test_invalid_surname(self):
         """Test invalid input for last name."""
-        inputs = ["Lekau", "Mamabo1o", "Mamabolo", "2022", "Cape Town"]
+        inputs = ["Lekau", "Mamabo1o", "Mamabolo", "2024", "Cape Town"]
         expected_output = (
-            "Insert your first name\n"
-            "Insert your last name\n"
-            "Invalid last name\n"
-            "Insert your last name\n"
-            "Insert your cohort\n"
-            "Insert the campus you will be attending in\n"
-            "kaumam2022CPT\n"
+            "Insert your first name:\n"
+            "Insert your last name:\n"
+            "Invalid last name. Names should not contain digits or special characters.\n"
+            "Insert your last name:\n"
+            "Insert your cohort:\n"
+            "Insert the campus you will be attending in:\n"
+            "kaumam2024CPT\n"
         )
         self.run_user_details_test(inputs, expected_output)
 
     def test_invalid_cohort(self):
         """Test invalid input for cohort."""
-        inputs = ["Joshua", "Overton", "2020", "2021", "2022", "Phokeng"]
+        inputs = ["Joshua", "Overton", "2022", "2023", "2024", "Phokeng"]
         expected_output = (
-            "Insert your first name\n"
-            "Insert your last name\n"
-            "Insert your cohort\n"
-            "Invalid cohort\n"
-            "Insert your cohort\n"
-            "Invalid cohort\n"
-            "Insert your cohort\n"
-            "Insert the campus you will be attending in\n"
-            "huaove2022PHO\n"
+            "Insert your first name:\n"
+            "Insert your last name:\n"
+            "Insert your cohort:\n"
+            "Invalid cohort.\n"
+            "Insert your cohort:\n"
+            "Invalid cohort.\n"
+            "Insert your cohort:\n"
+            "Insert the campus you will be attending in:\n"
+            "huaove2024PHO\n"
         )
         self.run_user_details_test(inputs, expected_output)
 
@@ -65,27 +66,27 @@ class username_generator_test(unittest.TestCase):
         """Test invalid input for campus."""
         inputs = ["Sandiselwe", "Zwane", "2026", "Pretoria", "Johannesburg"]
         expected_output = (
-            "Insert your first name\n"
-            "Insert your last name\n"
-            "Insert your cohort\n"
-            "Insert the campus you will be attending in\n"
-            "Invalid campus\n"
-            "Insert the campus you will be attending in\n"
+            "Insert your first name:\n"
+            "Insert your last name:\n"
+            "Insert your cohort:\n"
+            "Insert the campus you will be attending in:\n"
+            "Invalid campus.\n"
+            "Insert the campus you will be attending in:\n"
             "lwezwa2026JHB\n"
         )
         self.run_user_details_test(inputs, expected_output)
 
     def test_empty_first_name(self):
         """Test empty first name."""
-        inputs = ["", "Thandeka", "Mngomezulu", "2022", "Phokeng"]
+        inputs = ["", "Thandeka", "Mngomezulu", "2024", "Phokeng"]
         expected_output = (
-            "Insert your first name\n"
-            "Invalid first name\n"
-            "Insert your first name\n"
-            "Insert your last name\n"
-            "Insert your cohort\n"
-            "Insert the campus you will be attending in\n"
-            "ekamng2022PHO\n"
+            "Insert your first name:\n"
+            "Invalid first name.\n"
+            "Insert your first name:\n"
+            "Insert your last name:\n"
+            "Insert your cohort:\n"
+            "Insert the campus you will be attending in:\n"
+            "ekamng2024PHO\n"
         )
         self.run_user_details_test(inputs, expected_output)
 
@@ -115,18 +116,19 @@ class username_generator_test(unittest.TestCase):
         self.assertEqual(user_campus("durban"), "DBN")
         self.assertEqual(user_campus("phokeng"), "PHO")
 
-    @patch("sys.stdin", StringIO("Corban\nLoots\n2022\nDurban"))
+    @patch("sys.stdin", StringIO("Corban\nLoots\n2024\nDurban"))
     @patch("sys.stdout", new_callable=StringIO)
     def test_username_generation(self, mock_stdout):
         """Test full username generation flow."""
         user_details()
-        self.assertEqual(mock_stdout.getvalue(), (
-            "Insert your first name\n"
-            "Insert your last name\n"
-            "Insert your cohort\n"
-            "Insert the campus you will be attending in\n"
-            "banloo2022DBN\n"
-        ))
+        expected_output = (
+            "Insert your first name:\n"
+            "Insert your last name:\n"
+            "Insert your cohort:\n"
+            "Insert the campus you will be attending in:\n"
+            "banloo2024DBN\n"
+        )
+        self.assertEqual(mock_stdout.getvalue(), expected_output)
 
     def test_edge_case_campus_abbreviation(self):
         """Test campus abbreviation with mixed casing."""
@@ -140,17 +142,17 @@ class username_generator_test(unittest.TestCase):
 
     def test_numeric_and_special_name_inputs(self):
         """Test usernames with numeric or special characters in names."""
-        inputs = ["An@", "#Smith", "2023", "Johannesburg"]
+        inputs = ["An@", "Anne", "#Smith", "Smith", "2024", "Johannesburg"]
         expected_output = (
-            "Insert your first name\n"
-            "Invalid first name\n"
-            "Insert your first name\n"
-            "Insert your last name\n"
-            "Invalid last name\n"
-            "Insert your last name\n"
-            "Insert your cohort\n"
-            "Insert the campus you will be attending in\n"
-            "nthsmi2023JHB\n"
+            "Insert your first name:\n"
+            "Invalid first name. Names should not contain digits or special characters.\n"
+            "Insert your first name:\n"
+            "Insert your last name:\n"
+            "Invalid last name. Names should not contain digits or special characters.\n"
+            "Insert your last name:\n"
+            "Insert your cohort:\n"
+            "Insert the campus you will be attending in:\n"
+            "nnesmi2024JHB\n"
         )
         self.run_user_details_test(inputs, expected_output)
 

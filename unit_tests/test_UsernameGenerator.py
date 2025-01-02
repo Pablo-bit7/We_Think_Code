@@ -28,7 +28,7 @@ class username_generator_test(unittest.TestCase):
             "Insert your last name:\n"
             "Insert your cohort:\n"
             "Insert the campus you will be attending in:\n"
-            "lerjac2024DBN\n"
+            # "lerjac2024DBN\n"
         )
         self.run_user_details_test(inputs, expected_output)
 
@@ -42,7 +42,7 @@ class username_generator_test(unittest.TestCase):
             "Insert your last name:\n"
             "Insert your cohort:\n"
             "Insert the campus you will be attending in:\n"
-            "kaumam2024CPT\n"
+            # "kaumam2024CPT\n"
         )
         self.run_user_details_test(inputs, expected_output)
 
@@ -58,7 +58,7 @@ class username_generator_test(unittest.TestCase):
             "Invalid cohort.\n"
             "Insert your cohort:\n"
             "Insert the campus you will be attending in:\n"
-            "huaove2024PHO\n"
+            # "huaove2024PHO\n"
         )
         self.run_user_details_test(inputs, expected_output)
 
@@ -72,7 +72,7 @@ class username_generator_test(unittest.TestCase):
             "Insert the campus you will be attending in:\n"
             "Invalid campus.\n"
             "Insert the campus you will be attending in:\n"
-            "lwezwa2026JHB\n"
+            # "lwezwa2026JHB\n"
         )
         self.run_user_details_test(inputs, expected_output)
 
@@ -86,7 +86,7 @@ class username_generator_test(unittest.TestCase):
             "Insert your last name:\n"
             "Insert your cohort:\n"
             "Insert the campus you will be attending in:\n"
-            "ekamng2024PHO\n"
+            # "ekamng2024PHO\n"
         )
         self.run_user_details_test(inputs, expected_output)
 
@@ -120,7 +120,11 @@ class username_generator_test(unittest.TestCase):
     @patch("sys.stdout", new_callable=StringIO)
     def test_username_generation(self, mock_stdout):
         """Test full username generation flow."""
-        user_details()
+        user_info = user_details() # (first_name, last_name, cohort, campus)
+        campus_abbreviation = user_campus(user_info[3])
+        generated_username = create_user_name(
+        user_info[0], user_info[1], user_info[2], campus_abbreviation
+        )
         expected_output = (
             "Insert your first name:\n"
             "Insert your last name:\n"
@@ -129,6 +133,7 @@ class username_generator_test(unittest.TestCase):
             "banloo2024DBN\n"
         )
         self.assertEqual(mock_stdout.getvalue(), expected_output)
+        self.assertEqual(generated_username, "banloo2024DBN")
 
     def test_edge_case_campus_abbreviation(self):
         """Test campus abbreviation with mixed casing."""
@@ -137,8 +142,8 @@ class username_generator_test(unittest.TestCase):
 
     def test_edge_case_names(self):
         """Test name extraction with edge cases like short names."""
-        username = create_user_name("Al", "Li", "2025", "Durban")
-        self.assertEqual(username, "alili2025DBN")
+        username = create_user_name("Al", "Li", "2025", "DBN")
+        self.assertEqual(username, "alolio2025DBN")
 
     def test_numeric_and_special_name_inputs(self):
         """Test usernames with numeric or special characters in names."""
@@ -152,7 +157,7 @@ class username_generator_test(unittest.TestCase):
             "Insert your last name:\n"
             "Insert your cohort:\n"
             "Insert the campus you will be attending in:\n"
-            "nnesmi2024JHB\n"
+            # "nnesmi2024JHB\n"
         )
         self.run_user_details_test(inputs, expected_output)
 

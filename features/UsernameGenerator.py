@@ -81,7 +81,11 @@ def create_user_name(first_name, last_name, cohort, final_campus):
     if len(last_name) < 3:
         last_name = last_name + "O"
 
-    user_name = f"{first_name[-3:].lower()}{last_name[0:3].lower()}{cohort}{final_campus}"
+    user_name = (
+        f"{first_name[-3:].lower()}"
+        f"{last_name[0:3].lower()}"
+        f"{cohort}{final_campus}"
+    )
     print(f"{user_name}")
 
     return (user_name)

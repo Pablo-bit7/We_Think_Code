@@ -1,4 +1,3 @@
-
 import unittest
 from team_allocator import *
 

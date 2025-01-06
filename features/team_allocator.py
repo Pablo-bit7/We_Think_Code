@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 '''
     This is the team allocator project solution example project
 '''
@@ -35,36 +36,6 @@ def dbn_campus_students(student_list):
     return dbn_students
 
 
-def cpt_campus_students(student_list):
-    '''
-    from the list of students above, fill in this function to return a list of all
-    students in the Cape Town campus only.
-    '''
-    cpt_students = []
-
-    return cpt_students
-
-
-def jhb_campus_students(student_list):
-    '''
-    from the list of students above, fill in this function to return a list of all
-    students in the Johannesburg campus only.
-    '''
-    jhb_students = []
-
-    return jhb_students
-
-
-def nw_campus_students(student_list):
-    '''
-    from the list of students above, fill in this function to return a list of all
-    students in the North West campus only.
-    '''
-    nw_students = []
-
-    return nw_students
-
-    
 def dbn_physical_students(dbn_students):
     '''
     from the list of dbn_campus_students, fill in this function to return a list of all
@@ -88,6 +59,15 @@ def dbn_teams_file(durban_physical_teams):
     write and save the information in the dbn_physical_teams into a textfile
     '''
 
+
+def cpt_campus_students(student_list):
+    '''
+    from the list of students above, fill in this function to return a list of all
+    students in the Cape Town campus only.
+    '''
+    cpt_students = []
+
+    return cpt_students
 
 
 def cpt_physical_students(cpt_physical_students):
@@ -114,6 +94,16 @@ def cpt_teams_file(capetown_final_teams):
     '''
 
 
+def jhb_campus_students(student_list):
+    '''
+    from the list of students above, fill in this function to return a list of all
+    students in the Johannesburg campus only.
+    '''
+    jhb_students = []
+
+    return jhb_students
+
+
 def jhb_physical_students(jhb_physical_students):
     '''
     from the list of jhb_campus_students, fill in this function to return a list of all
@@ -131,10 +121,21 @@ def jhb_physical_teams(jhb_physical_teams):
 
     return jhb_physical_teams
 
+
 def jhb_teams_file(jhb_final_teams):
     '''
     write and save the information in the jhb_physical_teams into a textfile
     '''
+
+
+def nw_campus_students(student_list):
+    '''
+    from the list of students above, fill in this function to return a list of all
+    students in the North West campus only.
+    '''
+    nw_students = []
+
+    return nw_students
 
 
 def nw_physical_students(nw_physical_students):

@@ -1,4 +1,7 @@
 #!/usr/bin/env python3
+"""
+Username Generator Module
+"""
 from xml.dom import UserDataHandler
 from datetime import datetime
 

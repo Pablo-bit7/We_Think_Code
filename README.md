@@ -11,7 +11,7 @@
 ---
 
 ### 1. Project Overview
-**Bootcamp Helper** is a program designed to automate internal bootcamp processes and manage bootcamp operations. It includes four distinct features that address common administrative tasks. This project serves as a foundation for developing a more advanced bootcamp management tool, BootBuddy.
+The **Bootcamp Helper** wass a simple CLI program designed to emulate the automation and management of internal bootcamp processes and operations. There are four distinct features that address common administrative tasks.
 
 ---
 
@@ -20,7 +20,7 @@
    Generates unique usernames for bootcamp participants based on a specific format.
 
 2. **Team Allocator**  
-   Assigns participants into teams based on track (experienced/inexperienced), campus, and bootcamp type (virtual/physical).
+   Assigns participants into teams based on track their campus and mode of attendence (virtual/physical).
 
 3. **Registration Station**  
    Displays candidate information and booking details, allowing users to confirm or modify their bookings.
@@ -47,10 +47,12 @@ python3 -m unittest unit_tests/test_<feature_name>.py
 ---
 
 ### 5. Limitations
-- File and function names are predefined and must not be altered.
+- File and function names were predefined not be altered.
 - Features are implemented as standalone modules, focusing on the internal processes for bootcamp management.
 
 ---
 
 ### 6. Acknowledgements
-This project is part of the curriculum at **WTC** (**WeThinkCode_**). Special thanks to mentors and peers for their guidance and support.
+This project was part of the bootcamp curriculum at **WTC** (**WeThinkCode_**). It now serves as the foundation for developing a more advanced bootcamp management tool, BootBuddy.
+
+Special thanks to the mentors and peers for their guidance, assistance and support!

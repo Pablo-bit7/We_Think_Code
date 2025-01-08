@@ -267,7 +267,7 @@ def virtual_teams(virtual_campus):
 
     for student in virtual_campus:
         team.append(student)
-        if lean(team) == 4:
+        if len(team) == 4:
             virtual_teams_list.append(team)
             team = []
 
@@ -296,3 +296,22 @@ if __name__ == '__main__':
     physical_dbn_students = dbn_physical_students(dbn_students)
     dbn_teams = dbn_physical_teams(physical_dbn_students)
     dbn_teams_file(dbn_teams)
+
+    cpt_students = cpt_campus_students(students)
+    physical_cpt_students = cpt_physical_students(cpt_students)
+    cpt_teams = cpt_physical_teams(physical_cpt_students)
+    cpt_teams_file(cpt_teams)
+
+    jhb_students = jhb_campus_students(students)
+    physical_jhb_students = jhb_physical_students(jhb_students)
+    jhb_teams = jhb_physical_teams(physical_jhb_students)
+    jhb_teams_file(jhb_teams)
+
+    nw_students = nw_campus_students(students)
+    physical_nw_students = nw_physical_students(nw_students)
+    nw_teams = nw_physical_teams(physical_nw_students)
+    nw_teams_file(nw_teams)
+
+    vr_students = get_virtual_students(students)
+    vr_teams = virtual_teams(vr_students)
+    virtual_teams_file(vr_teams)

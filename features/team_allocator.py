@@ -69,7 +69,7 @@ def dbn_physical_teams(dbn_physical_students_list):
     return (dbn_physical_teams_list)
 
 
-def dbn_teams_file(durban_physical_teams_list):
+def dbn_teams_file(dbn_physical_teams_list):
     """
     Writes the physical Durban teams into a text file.
     """

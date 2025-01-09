@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Unit tests for the Username Generator module.
+Unit tests for the Username Generator.
 """
 from datetime import date
 from io import StringIO
@@ -15,7 +15,7 @@ from features.UsernameGenerator import (
 
 
 class username_generator_test(unittest.TestCase):
-    """Tests for the Username Generator module."""
+    """Tests for the UsernameGenerator module."""
 
     def run_user_details_test(self, inputs, expected_output):
         """

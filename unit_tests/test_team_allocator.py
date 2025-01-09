@@ -1,8 +1,13 @@
 #!/usr/bin/env python3
+"""
+Unit tests for the Team Allocator.
+"""
 import unittest
-from team_allocator import *
+from features.team_allocator import *
+
 
 class TestTeamAllocator(unittest.TestCase):
+    """Tests for the team_allocator module."""
 
     def test_data_base(self):
         database = student_list()

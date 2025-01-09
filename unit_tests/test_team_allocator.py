@@ -22,7 +22,7 @@ class TestTeamAllocator(unittest.TestCase):
         ]
         durban_campus = dbn_campus_students(test_database)
         self.assertEqual(durban_campus, ['zanelejhb2022-2may-durbanvirtual'])
-    
+
     def test_cpt_campus(self):
         test_database = [
             'zakithikhDBN2022 - 4 April - Johannesburg Physical - seat 3',
@@ -41,8 +41,9 @@ class TestTeamAllocator(unittest.TestCase):
             'zaneleJHB2022 - 2 May - Durban Virtual'
         ]
         joburg_campus = jhb_campus_students(test_database)
-        self.assertEqual(joburg_campus, ['zakithikhdbn2022-4april-johannesburgphysical-seat3'])
-
+        self.assertEqual(joburg_campus, [
+            'zakithikhdbn2022-4april-johannesburgphysical-seat3'
+        ])
 
     def test_nw_campus(self):
         test_database = [
@@ -52,9 +53,10 @@ class TestTeamAllocator(unittest.TestCase):
             'zaneleJHB2022 - 2 May - Durban Virtual'
         ]
         phokeng_campus = nw_campus_students(test_database)
-        self.assertEqual(phokeng_campus, ['thandohdbn2022-4april-phokengphysical-seat3'])
+        self.assertEqual(phokeng_campus, [
+            'thandohdbn2022-4april-phokengphysical-seat3'
+        ])
 
-    
     def test_dbn_physical_students(self):
         test_database = [
             'zaneleJHB2022 - 2 May - Durban Virtual',
@@ -182,10 +184,11 @@ class TestTeamAllocator(unittest.TestCase):
         ]
         cpt_even_teams = cpt_physical_teams(test_database)
         self.assertEqual(cpt_even_teams, [
-            ['zakithikhdbn2022-4april-capetownphysical-seat3',
-            'thembisiwedbn2022-4april-capetownphysical-seat5',
-            'thenjisiwedbn2022-4april-capetownphysical-seat6',
-            'thetheleliledbn2022-4april-capetownphysical-seat7'
+            [
+                'zakithikhdbn2022-4april-capetownphysical-seat3',
+                'thembisiwedbn2022-4april-capetownphysical-seat5',
+                'thenjisiwedbn2022-4april-capetownphysical-seat6',
+                'thetheleliledbn2022-4april-capetownphysical-seat7'
             ],
             [
                 'thembidbn2022-4april-capetownphysical-seat4',
@@ -230,7 +233,6 @@ class TestTeamAllocator(unittest.TestCase):
             ]
         ])
 
-
     def test_johannesburg_even_teams(self):
         test_database = [
             'zakithikhDBN2022 - 4 April - Johannesburg Physical - seat 3',
@@ -257,7 +259,6 @@ class TestTeamAllocator(unittest.TestCase):
                 'thatodbn2022-4april-johannesburgphysical-seat1'
             ]
         ])
-
 
     def test_johannesburg_odd_teams(self):
         test_database = [

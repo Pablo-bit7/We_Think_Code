@@ -11,18 +11,18 @@
 ---
 
 ### 1. Project Overview
-The **Bootcamp Helper** wass a simple CLI program designed to emulate the automation and management of internal bootcamp processes and operations. There are four distinct features that address common administrative tasks.
+The **Bootcamp Helper** was part of the bootcamp curriculum at **WTC** (**WeThinkCode_**). This project was designed to be a simple CLI program which emulates the automation and management of internal bootcamp processes and operations. It also served as an introduction to test driven development. There are four distinct features that address common administrative tasks.
 
 ---
 
 ### 2. Features
-1. **Username Generator**  
+1. **Username Generator**
    Generates unique usernames for bootcamp participants based on a specific format.
 
-2. **Team Allocator**  
-   Assigns participants into teams based on track their campus and mode of attendence (virtual/physical).
+2. **Team Allocator**
+   Assigns participants into teams based on their campus and mode of attendence (virtual/physical).
 
-3. **Registration Station**  
+3. **Registration Station**
    Displays candidate information and booking details, allowing users to confirm or modify their bookings.
 
 4. **Bootcamp Exercise Marker**  
@@ -43,6 +43,10 @@ Run the unit tests for each feature:
 ```bash
 python3 -m unittest unit_tests/test_<feature_name>.py
 ```
+Run exploratory tests for each feature:
+```bash
+./features/<feature_name>.py
+```
 
 ---
 
@@ -53,6 +57,5 @@ python3 -m unittest unit_tests/test_<feature_name>.py
 ---
 
 ### 6. Acknowledgements
-This project was part of the bootcamp curriculum at **WTC** (**WeThinkCode_**). It now serves as the foundation for developing a more advanced bootcamp management tool, BootBuddy.
-
-Special thanks to the mentors and peers for their guidance, assistance and support!
+This project now serves as the foundation for a more advanced bootcamp management tool.
+A special thanks goes out to the mentors and my peers for their guidance, assistance and support!

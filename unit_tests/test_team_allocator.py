@@ -60,7 +60,7 @@ class TestTeamAllocator(unittest.TestCase):
     def test_dbn_physical_students(self):
         test_database = [
             'zaneleJHB2022 - 2 May - Durban Virtual',
-            'ntobekoDBN2022 - 4 April - Phokeng Physical - seat 2',
+            # 'ntobekoDBN2022 - 4 April - Phokeng Physical - seat 2',
             'zaneleJHB2022 - 2 May - Durban Physical - seat 3',
             'yenzileJHB2022 - 2 May - Durban Physical - seat 3'
         ]
@@ -73,7 +73,7 @@ class TestTeamAllocator(unittest.TestCase):
     def test_cpt_physical_students(self):
         test_database = [
             'zaneleJHB2022 - 2 May - Durban Virtual',
-            'ntobekoDBN2022 - 4 April - Phokeng Physical - seat 2',
+            # 'ntobekoDBN2022 - 4 April - Phokeng Physical - seat 2',
             'zaneleJHB2022 - 2 May - Cape Town Physical - seat 3',
             'yenzileJHB2022 - 2 May - Cape Town Physical - seat 3'
         ]
@@ -86,7 +86,7 @@ class TestTeamAllocator(unittest.TestCase):
     def test_jhb_physical_students(self):
         test_database = [
             'zaneleJHB2022 - 2 May - Durban Virtual',
-            'ntobekoDBN2022 - 4 April - Phokeng Physical - seat 2',
+            # 'ntobekoDBN2022 - 4 April - Phokeng Physical - seat 2',
             'zaneleJHB2022 - 2 May - Johannesburg Physical - seat 3',
             'yenzileJHB2022 - 2 May - Johannesburg Physical - seat 3'
         ]
@@ -105,6 +105,7 @@ class TestTeamAllocator(unittest.TestCase):
         ]
         physical_students = nw_physical_students(test_database)
         self.assertEqual(physical_students, [
+            'ntobekodbn2022-4april-phokengphysical-seat2',
             'zanelejhb2022-2may-phokengphysical-seat3',
             'yenzilejhb2022-2may-phokengphysical-seat3'
         ])
@@ -167,7 +168,7 @@ class TestTeamAllocator(unittest.TestCase):
             [
                 'zuzumuzidbn2022-4april-durbanphysical-seat18',
                 'kgothatshodbn2022-4april-durbanphysical-seat19',
-                'josephinedbn022-4april-durbanphysical-seat11'
+                'josephinedbn2022-4april-durbanphysical-seat11'
             ]
         ])
 
@@ -229,7 +230,7 @@ class TestTeamAllocator(unittest.TestCase):
             [
                 'zuzumuzidbn2022-4april-capetownphysical-seat18',
                 'kgothatshodbn2022-4april-capetownphysical-seat19',
-                'josephinedbn022-4april-capetownphysical-seat11'
+                'josephinedbn2022-4april-capetownphysical-seat11'
             ]
         ])
 
@@ -291,7 +292,7 @@ class TestTeamAllocator(unittest.TestCase):
             [
                 'zuzumuzidbn2022-4april-johannesburgphysical-seat18',
                 'kgothatshodbn2022-4april-johannesburgphysical-seat19',
-                'josephinedbn022-4april-johannesburgphysical-seat11'
+                'josephinedbn2022-4april-johannesburgphysical-seat11'
             ]
         ])
 

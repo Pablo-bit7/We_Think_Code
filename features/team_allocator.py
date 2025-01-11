@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-    Team Allocator Module
+Team Allocator Module
 """
 
 
@@ -54,7 +54,8 @@ def dbn_campus_students(student_list):
     dbn_students = []
     for student in student_list:
         if "Durban" in student:
-            dbn_students.append(student)
+            x = student.lower().replace(" ", "")
+            dbn_students.append(x)
 
     return (dbn_students)
 
@@ -66,7 +67,11 @@ def dbn_physical_students(dbn_students):
     dbn_physical_students_list = []
     for student in dbn_students:
         if "Physical" in student:
-            dbn_physical_students_list.append(student)
+            x = student.lower().replace(" ", "")
+            dbn_physical_students_list.append(x)
+        elif "physical" in student:
+            x = student.lower().replace(" ", "")
+            dbn_physical_students_list.append(x)
 
     return (dbn_physical_students_list)
 
@@ -79,7 +84,8 @@ def dbn_physical_teams(dbn_physical_students_list):
     team = []
 
     for student in dbn_physical_students_list:
-        team.append(student)
+        x = student.lower().replace(" ", "")
+        team.append(x)
         if len(team) == 4:
             dbn_physical_teams_list.append(team)
             team = []  # reset
@@ -109,7 +115,8 @@ def cpt_campus_students(student_list):
     cpt_students = []
     for student in student_list:
         if "Cape Town" in student:
-            cpt_students.append(student)
+            x = student.lower().replace(" ", "")
+            cpt_students.append(x)
 
     return (cpt_students)
 
@@ -121,8 +128,12 @@ def cpt_physical_students(cpt_students):
     cpt_physical_students_list = []
     for student in cpt_students:
         if "Physical" in student:
-           cpt_physical_students_list.append(student) 
-    
+            x = student.lower().replace(" ", "")
+            cpt_physical_students_list.append(x)
+        elif "physical" in student:
+            x = student.lower().replace(" ", "")
+            cpt_physical_students_list.append(x)
+
     return (cpt_physical_students_list)
 
 
@@ -130,11 +141,12 @@ def cpt_physical_teams(cpt_physical_students_list):
     """
     Divides the physical Cape Town atendees into teams of 4.
     """
-    cpt_physical_teams_list =[]
+    cpt_physical_teams_list = []
     team = []
 
     for student in cpt_physical_students_list:
-        team.append(student)
+        x = student.lower().replace(" ", "")
+        team.append(x)
         if len(team) == 4:
             cpt_physical_teams_list.append(team)
             team = []
@@ -159,24 +171,30 @@ def cpt_teams_file(cpt_physical_teams_list):
 
 def jhb_campus_students(student_list):
     """
-    Filters for attendees at the Johannesburg campus from the full student list.
+    Filters for attendees at the Johannesburg campus
+    from the full student list.
     """
     jhb_students = []
     for student in student_list:
         if "Johannesburg" in student:
-            jhb_students.append(student)
+            x = student.lower().replace(" ", "")
+            jhb_students.append(x)
 
     return (jhb_students)
 
 
 def jhb_physical_students(jhb_students):
     """
-    Filters for physical attendees at the Johannesburg campus 
+    Filters for physical attendees at the Johannesburg campus.
     """
     jhb_physical_students_list = []
     for student in jhb_students:
         if "Physical" in student:
-            jhb_physical_students_list.append(student)
+            x = student.lower().replace(" ", "")
+            jhb_physical_students_list.append(x)
+        elif "physical" in student:
+            x = student.lower().replace(" ", "")
+            jhb_physical_students_list.append(x)
 
     return (jhb_physical_students_list)
 
@@ -189,7 +207,8 @@ def jhb_physical_teams(jhb_physical_students_list):
     team = []
 
     for student in jhb_physical_students_list:
-        team.append(student)
+        x = student.lower().replace(" ", "")
+        team.append(x)
         if len(team) == 4:
             jhb_physical_teams_list.append(team)
             team = []
@@ -219,7 +238,8 @@ def nw_campus_students(student_list):
     nw_students = []
     for student in student_list:
         if "Phokeng" in student:
-            nw_students.append(student)
+            x = student.lower().replace(" ", "")
+            nw_students.append(x)
 
     return (nw_students)
 
@@ -231,7 +251,11 @@ def nw_physical_students(nw_students):
     nw_physical_students_list = []
     for student in nw_students:
         if "Physical" in student:
-            nw_physical_students_list.append(student)
+            x = student.lower().replace(" ", "")
+            nw_physical_students_list.append(x)
+        elif "physical" in student:
+            x = student.lower().replace(" ", "")
+            nw_physical_students_list.append(x)
 
     return (nw_physical_students_list)
 
@@ -244,7 +268,8 @@ def nw_physical_teams(nw_physical_students_list):
     team = []
 
     for student in nw_physical_students_list:
-        team.append(student)
+        x = student.lower().replace(" ", "")
+        team.append(x)
         if len(team) == 4:
             nw_physical_teams_list.append(team)
             team = []
@@ -274,7 +299,8 @@ def get_virtual_students(student_list):
     virtual_campus = []
     for student in student_list:
         if "Virtual" in student:
-            virtual_campus.append(student)
+            x = student.lower().replace(" ", "")
+            virtual_campus.append(x)
 
     return (virtual_campus)
 
@@ -287,7 +313,8 @@ def virtual_teams(virtual_campus):
     team = []
 
     for student in virtual_campus:
-        team.append(student)
+        x = student.lower().replace(" ", "")
+        team.append(x)
         if len(team) == 4:
             virtual_teams_list.append(team)
             team = []
@@ -300,7 +327,7 @@ def virtual_teams(virtual_campus):
 
 def virtual_teams_file(virtual_teams_list):
     """
-    Writes the virtual teams into a text file
+    Writes the virtual teams into a text file.
     """
     with open("vr_teams.txt", "w") as file:
         for team_number, team in enumerate(virtual_teams_list, start=1):

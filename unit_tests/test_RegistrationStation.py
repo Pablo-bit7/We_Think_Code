@@ -6,7 +6,7 @@ import unittest
 from io import StringIO
 import sys
 from unittest.mock import patch
-import RegistrationStation
+import features.RegistrationStation
 
 
 class MyTestCase(unittest.TestCase):

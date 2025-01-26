@@ -4,51 +4,50 @@ Registration Station project
 """
 
 
-def input_user_name():
-    """
-    Takes username as input
-    """
-
-    return (user_name)
-
-
-def get_file_contents():
-    """
-    Return desired text file
-    """
-
-    return (file_name)
-
-
 def read_file(file_name):
+
     """
     Read and return contents of text file
     """
 
-    return (file_data)
 
+def input_user_name():
 
-def find_username(user_name, file_data):
     """
-    Main functiontion for running Registration Station, which inlcude:
-       * get username input from user
-       * check if username exists and print corresponding details
+    Takes username as input
     """
 
 
 def correct_or_incorrect():
+
     """
     Prompt to ask if details are correct or not
     """
 
 
 def correct_details():
+
     """
     Prompt to correct the user details in text file, which includes:
     * Username
     * Date
     * Location
     * Experience
+    """
+
+
+def get_file_contents():
+    """Return desired text file"""
+
+    return ("bootcampers.txt")
+
+
+def find_username(file_name):
+
+    """
+    Main functiontion for running Registration Station, which inlcude:
+       * get username input from user
+       * check if username exists and print corresponding details
     """
 
 

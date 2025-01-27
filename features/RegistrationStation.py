@@ -4,11 +4,23 @@ Registration Station project
 """
 
 
-def read_file(file_name):
+def get_file_contents():
+    """Return desired text file"""
 
+    return ("bootcampers.txt")
+
+
+def read_file(file_name):
     """
     Read and return contents of text file
     """
+    file_contents = []
+    try:
+        with open(file_name, "r+") as file:
+            for line in file:
+                file_contents.append(line.strip)
+
+    return (file_contents)
 
 
 def input_user_name():
@@ -34,12 +46,6 @@ def correct_details():
     * Location
     * Experience
     """
-
-
-def get_file_contents():
-    """Return desired text file"""
-
-    return ("bootcampers.txt")
 
 
 def find_username(file_name):

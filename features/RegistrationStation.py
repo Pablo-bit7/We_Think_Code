@@ -19,15 +19,21 @@ def read_file(file_name):
         with open(file_name, "r+") as file:
             for line in file:
                 file_contents.append(line.strip)
+    except FileNotFoundError:
+        print(f"Error: The file '{file_name}' was not found.")
+    except IOError:
+        print(f"Error: Could not read the file '{file_name}'.")
 
     return (file_contents)
 
 
 def input_user_name():
-
     """
     Takes username as input
     """
+    
+
+    return (user_name)
 
 
 def correct_or_incorrect():

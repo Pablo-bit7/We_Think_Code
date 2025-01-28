@@ -5,8 +5,9 @@ Registration Station project
 
 
 def get_file_contents():
-    """Return desired text file"""
-
+    """
+    Return desired text file
+    """
     return ("bootcampers.txt")
 
 
@@ -31,7 +32,12 @@ def input_user_name():
     """
     Takes username as input
     """
-    
+    while True:
+        user_name = input("Please enter you username:\n").strip()
+        if user_name.isalnum():
+            break
+        else:
+            print("Invalid username.")
 
     return (user_name)
 

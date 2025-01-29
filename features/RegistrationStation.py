@@ -19,7 +19,7 @@ def read_file(file_name):
     try:
         with open(file_name, "r+") as file:
             for line in file:
-                file_contents.append(line.strip)
+                file_contents.append(line.strip())
     except FileNotFoundError:
         print(f"Error: The file '{file_name}' was not found.")
     except IOError:
@@ -43,10 +43,19 @@ def input_user_name():
 
 
 def correct_or_incorrect():
-
     """
     Prompt to ask if details are correct or not
     """
+    while True:
+        answer = input("Are these details correct? (y/n):\n").strip().lower()
+        if not answer:
+            print("Invalid response")
+        elif answer == "y":
+            return ("correct")
+        elif answer == "n":
+            return ("incorrect")
+        else:
+            print("Invalid response.")
 
 
 def correct_details():

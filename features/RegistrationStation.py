@@ -59,7 +59,6 @@ def correct_or_incorrect():
 
 
 def correct_details():
-
     """
     Prompt to correct the user details in text file, which includes:
     * Username

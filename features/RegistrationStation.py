@@ -66,6 +66,10 @@ def correct_details():
     * Location
     * Experience
     """
+    while True:
+        details = input("Username - Date - Location - Experience: \n")
+        
+
 
 
 def find_username(file_name):

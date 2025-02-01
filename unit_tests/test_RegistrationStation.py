@@ -28,6 +28,7 @@ class MyTestCase(unittest.TestCase):
             text_capture.getvalue()
         )
 
+
     @patch("sys.stdin", StringIO("elomkhDBN2022\nY\n"))
     def test_valid_username_Uppercase(self):
         """
@@ -41,6 +42,7 @@ class MyTestCase(unittest.TestCase):
             "Select username: 4 April - Johannesburg Physical - No prior experience\n",
             text_capture.getvalue()
         )
+
 
     @patch("sys.stdin", StringIO("elokhDBN2022\nelomkhDBN2022\ny\n"))
     def test_invalid_username(self):
@@ -57,6 +59,7 @@ class MyTestCase(unittest.TestCase):
             text_capture.getvalue()
         )
 
+
     @patch("sys.stdin", StringIO("elomkhDBN2022\ny\n"))
     def test_valid_confirmation(self):
         """
@@ -72,6 +75,7 @@ class MyTestCase(unittest.TestCase):
             "Is this correct? (Y/n): ",
             text_capture.getvalue()
         )
+
 
     @patch("sys.stdin", StringIO("elonkhDBN2022\nelomkhDBN2022\ny\n"))
     def test_valid_confirmation_invalid_username(self):
@@ -90,6 +94,7 @@ class MyTestCase(unittest.TestCase):
             text_capture.getvalue()
         )
 
+
     @patch("sys.stdin", StringIO("elomkhDBN2022\nn\n"))
     def test_incorrect_user_details(self):
         """
@@ -105,6 +110,7 @@ class MyTestCase(unittest.TestCase):
             "Is this correct? (Y/n): ",
             text_capture.getvalue()
         )
+
 
     @patch("sys.stdin", StringIO("elomkhDBN2022\nn\nelomkhDBN2022 - 4 April - Johannesburg Physical - No prior experience\n"))
     def test_incorrect_user_details_corrected(self):
@@ -122,8 +128,8 @@ class MyTestCase(unittest.TestCase):
             "Is this correct? (Y/n): Username - Date - Location - Experience: 4 April - Johannesburg Physical - No prior experience\n""",
             text_capture.getvalue()
         )
- 
- 
+
+
     @patch("sys.stdin", StringIO("colootsJHB2023\nn\ncolootsJHB2023 - 13 May - Johannesburg Physical - No Prior Experience\n"))
     def test_incorrect_user_details_corrected_additional(self):
         """
@@ -140,7 +146,8 @@ class MyTestCase(unittest.TestCase):
             "Is this correct? (Y/n): Username - Date - Location - Experience: 13 May - Johannesburg Physical - No Prior Experience\n",
             text_capture.getvalue()
         )
- 
+
+
     @patch("sys.stdin", StringIO("colootsJHB2023\nn\ncolootsJHB2023 - 13 May - Johannesburg Physical - No Prior Experience\nn\ncolootsJHB2023 - 13 May - Johannesburg Physical - No Prior Experience\ny"))
     def test_incorrect_user_details_incorrect_addition(self):
         """

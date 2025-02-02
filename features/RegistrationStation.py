@@ -66,21 +66,26 @@ def correct_details(file_data, user_name):
     * Location
     * Experience
     """
+    updated_data = []
+    user_found = False
+
     for line in file_data:
         if user_name in line:
+            user_found = True
             while True:
                 corrected_details = input("Username - Date - Location - Experience: \n")
-                # if statements to ensure validity of input
-                # break if input is valid
-            line.append(corrected_details)
-            with open("bootcampers.txt", "r+") as file:
-                try:
-                    file.append(file_data)
-                    print("Details updated successfully.")
-                except IOError:
-                    print(f"Error: Could not write to the file '{file}'.")
+                # Validate input (non-empty, correct format)
+                if corrected_details: # Replace with proper validation
+                    updated_data.append()
+                    break
+                else:
+                    print("Invalid input format.")
         else:
-            
+            updated_data.append(line)
+
+    if not user_found:
+        print(f"Error: User '{user_name}' does not exist.")
+        return
 
 
 def find_username(file_name):

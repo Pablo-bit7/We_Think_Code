@@ -74,17 +74,12 @@ def correct_details(file_data, user_name):
             user_found = True
             while True:
                 corrected_details = input("Date - Location - Experience: \n")
+                parts = corrected_details.split(" - ")
+                date, location, experience = parts
                 # Validate input (non-empty, correct format)
-                if corrected_details.isalnum():
-                    if : # the date is invalid
-                        print("Invalid date.")
-                    if : # the location is invalid
-                        print("Invalid campus.")
-                    if : # the experience response is invalid
-                        print("Invalid response for experience.")
-                    else:
-                        updated_data.append(corrected_details)
-                        break
+                if len(parts) != 3:
+                    print("Invalid format.")
+                    continue
         else:
             updated_data.append(line)
 

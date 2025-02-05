@@ -62,7 +62,6 @@ def correct_or_incorrect():
 def correct_details(file_data, user_name):
     """
     Prompt to correct the user details in text file, which includes:
-    * Username
     * Date
     * Location
     * Experience
@@ -77,13 +76,32 @@ def correct_details(file_data, user_name):
                 corrected_details = input("Date - Location - Experience: \n")
                 parts = corrected_details.split(" - ")
                 date, location, experience = parts
-                # Validate input (non-empty, correct format)
+
                 if len(parts) != 3:
                     print("Invalid format.")
                     continue
-                if not re.match(r"\d{1,2} (January|February|March|April|May|June|July|August|September|October|November|December)$", date):
+
+                if not re.match(r"^\d{1,2} (January|February|March|April|May|June|July|August|September|October|November|December)$", date):
                     print("Invalid date format. Use 'DD Month'.")
                     continue
+
+                valid_locations = {
+                    "Johannesburg Physical",
+                    "Johannesburg Virtual",
+                    "Cape Town Physical",
+                    "Cape Town Virtual",
+                    "Durban Physical",
+                    "Durban Virtual",
+                    "Phokeng Physical",
+                    "Phokeng Virtual"
+                    }
+                if location not in valid_locations:
+                    print(f"Invalid location. Choose from: {','.join(valid_locations)}")
+                    continue
+
+                valid_experience = {"Prior Experience", "No Prior Experience"}
+                if experience not in valid_experience:
+                    print(f"Invalid response for experience. Choose from: {', '.join(valid_experience)}")
         else:
             updated_data.append(line)
 

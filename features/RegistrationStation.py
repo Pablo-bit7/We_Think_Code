@@ -2,6 +2,7 @@
 """
 Registration Station project
 """
+import re
 
 
 def get_file_contents():
@@ -79,6 +80,9 @@ def correct_details(file_data, user_name):
                 # Validate input (non-empty, correct format)
                 if len(parts) != 3:
                     print("Invalid format.")
+                    continue
+                if not re.match(r"\d{1,2} (January|February|March|April|May|June|July|August|September|October|November|December)$", date):
+                    print("Invalid date format. Use 'DD Month'.")
                     continue
         else:
             updated_data.append(line)

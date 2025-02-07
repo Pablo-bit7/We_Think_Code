@@ -99,9 +99,12 @@ def correct_details(file_data, user_name):
                     print(f"Invalid location. Choose from: {','.join(valid_locations)}")
                     continue
 
-                valid_experience = {"Prior Experience", "No Prior Experience"}
+                valid_experience = {
+                    "Prior Experience",
+                    "No Prior Experience"
+                    }
                 if experience not in valid_experience:
-                    print(f"Invalid response for experience. Choose from: {', '.join(valid_experience)}")
+                    print(f"Invalid response for experience. Choose from: {','.join(valid_experience)}")
         else:
             updated_data.append(line)
 

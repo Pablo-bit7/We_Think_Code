@@ -69,6 +69,15 @@ def correct_details(file_data, user_name):
     updated_data = []
     user_found = False
 
+    valid_locations = {
+        "Johannesburg Physical", "Johannesburg Virtual",
+        "Cape Town Physical", "Cape Town Virtual",
+        "Durban Physical", "Durban Virtual",
+        "Phokeng Physical", "Phokeng Virtual"
+    }
+
+    valid_experience = {"Prior Experience", "No Prior Experience"}
+
     for line in file_data:
         if user_name in line:
             user_found = True
@@ -86,26 +95,13 @@ def correct_details(file_data, user_name):
                     print("Invalid date format. Use 'DD Month'.")
                     continue
 
-                valid_locations = {
-                    "Johannesburg Physical",
-                    "Johannesburg Virtual",
-                    "Cape Town Physical",
-                    "Cape Town Virtual",
-                    "Durban Physical",
-                    "Durban Virtual",
-                    "Phokeng Physical",
-                    "Phokeng Virtual"
-                    }
                 if location not in valid_locations:
                     print(f"Invalid location. Choose from: {', '.join(valid_locations)}")
                     continue
 
-                valid_experience = {
-                    "Prior Experience",
-                    "No Prior Experience"
-                    }
                 if experience not in valid_experience:
                     print(f"Invalid response for experience. Choose from: {', '.join(valid_experience)}")
+                    continue
 
                 updated_data.append(f"{user_name} - {corrected_details}\n")
                 break

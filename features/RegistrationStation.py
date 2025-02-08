@@ -74,12 +74,13 @@ def correct_details(file_data, user_name):
             user_found = True
             while True:
                 corrected_details = input("Date - Location - Experience: \n")
-                parts = corrected_details.split(" - ")
-                date, location, experience = parts
 
+                parts = corrected_details.split(" - ")
                 if len(parts) != 3:
                     print("Invalid format.")
                     continue
+
+                date, location, experience = parts
 
                 if not re.match(r"^\d{1,2} (January|February|March|April|May|June|July|August|September|October|November|December)$", date):
                     print("Invalid date format. Use 'DD Month'.")
@@ -96,7 +97,7 @@ def correct_details(file_data, user_name):
                     "Phokeng Virtual"
                     }
                 if location not in valid_locations:
-                    print(f"Invalid location. Choose from: {','.join(valid_locations)}")
+                    print(f"Invalid location. Choose from: {', '.join(valid_locations)}")
                     continue
 
                 valid_experience = {
@@ -104,7 +105,10 @@ def correct_details(file_data, user_name):
                     "No Prior Experience"
                     }
                 if experience not in valid_experience:
-                    print(f"Invalid response for experience. Choose from: {','.join(valid_experience)}")
+                    print(f"Invalid response for experience. Choose from: {', '.join(valid_experience)}")
+
+                updated_data.append(f"{user_name} - {corrected_details}\n")
+                break
         else:
             updated_data.append(line)
 

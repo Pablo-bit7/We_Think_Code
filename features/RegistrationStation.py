@@ -17,6 +17,7 @@ def read_file(file_name):
     Read and return contents of text file
     """
     file_data = []
+
     try:
         with open(file_name, "r") as file:
             for line in file:
@@ -66,9 +67,6 @@ def correct_details(file_data, user_name):
     * Location
     * Experience
     """
-    updated_data = []
-    user_found = False
-
     valid_locations = {
         "Johannesburg Physical", "Johannesburg Virtual",
         "Cape Town Physical", "Cape Town Virtual",
@@ -78,9 +76,8 @@ def correct_details(file_data, user_name):
 
     valid_experience = {"Prior Experience", "No Prior Experience"}
 
-    for line in file_data:
+    for i, line in enumerate(file_data):
         if user_name in line:
-            user_found = True
             while True:
                 corrected_details = input("Date - Location - Experience: \n")
 
@@ -91,30 +88,29 @@ def correct_details(file_data, user_name):
 
                 date, location, experience = parts
 
-                if not re.match(r"^\d{1,2} (January|February|March|April|May|June|July|August|September|October|November|December)$", date):
+                date_pattern = (
+                    r"^\d{1,2} "
+                    r"(January|February|March|April|May|June|July|August|September|October|November|December)$"
+                    )
+                if not re.match(date_pattern, date):
                     print("Invalid date format. Use 'DD Month'.")
                     continue
 
-                if location not in valid_locations:
+                if location.title() not in valid_locations:
                     print(f"Invalid location. Choose from: {', '.join(valid_locations)}")
                     continue
 
-                if experience not in valid_experience:
+                if experience.title() not in valid_experience:
                     print(f"Invalid response for experience. Choose from: {', '.join(valid_experience)}")
                     continue
 
-                updated_data.append(f"{user_name} - {corrected_details}\n")
+                updated_line = f"{user_name} - {corrected_details}\n"
+                file_data[i] = updated_line
                 break
-        else:
-            updated_data.append(line)
-
-    if not user_found:
-        print(f"Error: User '{user_name}' does not exist.")
-        return
 
     try:
         with open("bootcampers.txt", "w") as file:
-            file.writelines(updated_data)
+            file.writelines(file_data)
     except IOError:
         print("Error: Could not write to file.")
 

@@ -121,15 +121,12 @@ def find_username(file_data, user_name):
        * get username input from user
        * check if username exists and print corresponding details
     """
-    user_found = False
-
     for line in file_data:
         if user_name in line:
             print(line)
-            user_found = True
-            return (user_found)
-        else:
-            return (user_found)
+            return (True)
+
+    return (False)
 
 
 if __name__ == "__main__":

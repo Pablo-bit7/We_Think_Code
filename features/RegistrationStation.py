@@ -91,7 +91,7 @@ def correct_details(file_data, user_name):
                 date_pattern = (
                     r"^\d{1,2} "
                     r"(January|February|March|April|May|June|July|August|September|October|November|December)$"
-                    )
+                )
                 if not re.match(date_pattern, date):
                     print("Invalid date format. Use 'DD Month'.")
                     continue
@@ -115,13 +115,21 @@ def correct_details(file_data, user_name):
         print("Error: Could not write to file.")
 
 
-def find_username(file_name):
-
+def find_username(file_data, user_name):
     """
-    Main functiontion for running Registration Station, which inlcude:
+    Main function for running Registration Station, which inlcudes:
        * get username input from user
        * check if username exists and print corresponding details
     """
+    user_found = False
+
+    for line in file_data:
+        if user_name in line:
+            print(line)
+            user_found = True
+            return (user_found)
+        else:
+            return (user_found)
 
 
 if __name__ == "__main__":

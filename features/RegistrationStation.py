@@ -123,7 +123,7 @@ def find_username(file_data, user_name):
     """
     for line in file_data:
         if user_name in line:
-            print(line)
+            print(line.strip())
             return (True)
 
     return (False)

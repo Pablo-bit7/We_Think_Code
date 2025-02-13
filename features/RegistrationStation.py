@@ -130,12 +130,27 @@ def find_username(file_data, user_name):
 
 
 if __name__ == "__main__":
-    registrations_file = get_file_contents()
-    information = find_username(registrations_file)
-    while True:
-        answer = correct_or_incorrect()
-        if answer == "correct":
-            print(information)
-            break
-        else:
-            correct_details()
+    file_name = get_file_contents()
+    file_data = read_file(file_name)
+    user_name = input_user_name()
+    
+    find_username(file_data, user_name)
+    if find_username == True:
+        correct_or_incorrect()
+        if correct_or_incorrect() == "incorrect":
+            correct_details(file_data, user_name)
+        elif correct_or_incorrect() == "correct":
+            print("Registration complete!")
+
+    elif find_username == False:
+        print(f"The user {user_name} does not exist.")
+
+
+
+#    while True:
+#        answer = correct_or_incorrect()
+#        if answer == "correct":
+#            print(information)
+#            break
+#        else:
+#            correct_details()

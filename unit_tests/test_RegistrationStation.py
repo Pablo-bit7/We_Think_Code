@@ -14,6 +14,14 @@ class MyTestCase(unittest.TestCase):
     Test cases for validating the Registration Station feature.
     """
 
+
+    def setUp(self):
+        """
+        Helper function ensures sys.stdout is restored after each test
+        """
+        self.addCleanup(lambda: setattr(sys, "stdout", sys.__stdout__))
+
+
     @patch("sys.stdin", StringIO("elomkhDBN2022\ny\n"))
     def test_valid_username_lowercase(self):
         """

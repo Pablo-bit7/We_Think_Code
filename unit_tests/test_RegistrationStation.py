@@ -22,19 +22,16 @@ class MyTestCase(unittest.TestCase):
         self.addCleanup(lambda: setattr(sys, "stdout", sys.__stdout__))
 
 
-    @patch("sys.stdin", StringIO("elomkhDBN2022\ny\n"))
     def test_valid_username_lowercase(self):
         """
         Test valid lowercase username input.
         """
-        text_capture = StringIO()
-        sys.stdout = text_capture
+        find_username("bootcampers.txt", "elomkhDBN2022")
 
-        RegistrationStation.find_username('bootcampers.txt')
-        self.assertEqual(
-            "Select username: 4 April - Johannesburg Physical - No prior experience\n",
-            text_capture.getvalue()
-        )
+        output = text_capture.getvalue()
+        expected = "4 April - Johannesburg Physical - No prior experience\n"
+
+        self.assertEqual(output, expected)
 
 
     @patch("sys.stdin", StringIO("elomkhDBN2022\nY\n"))

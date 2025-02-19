@@ -26,28 +26,27 @@ class MyTestCase(unittest.TestCase):
         """
         Test valid username input.
         """
-        find_username("bootcampers.txt", "elomkhDBN2022")
-
-        output = text_capture.getvalue()
-        expected = "4 April - Johannesburg Physical - No prior experience\n"
-
-        self.assertEqual(output, expected)
-
-
-    @patch("sys.stdin", StringIO("elokhDBN2022\nelomkhDBN2022\ny\n"))
-    def test_invalid_username(self):
-        """
-        Test invalid username followed by a valid username.
-        """
         text_capture = StringIO()
         sys.stdout = text_capture
 
-        RegistrationStation.find_username('bootcampers.txt')
+        file_data = read_file("bootcampers.txt")
+        result = find_username(file_data, "elomkhDBN2022")
+
         self.assertEqual(
-            "Select username: Please enter valid existing username\n"
-            "Select username: 4 April - Johannesburg Physical - No prior experience\n",
-            text_capture.getvalue()
+                text_capture.getvalue(),
+                "4 April - Johannesburg Physical - No prior experience\n"
         )
+        self.assertTrue(result)
+
+
+    def test_invalid_username(self):
+        """
+        Test invalid username.
+        """
+        file_data = read_file("bootcampers.txt")
+        result = find_username(file_data, "elokhDBN2022")
+
+        self.assertFalse(result)
 
 
     @patch("sys.stdin", StringIO("elomkhDBN2022\ny\n"))

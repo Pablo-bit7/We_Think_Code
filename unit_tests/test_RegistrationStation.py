@@ -49,7 +49,7 @@ class MyTestCase(unittest.TestCase):
         self.assertFalse(result)
 
 
-    @patch("sys.stdin", StringIO("elomkhDBN2022\ny\n"))
+    @patch("sys.stdin", StringIO("y"))
     def test_valid_confirmation(self):
         """
         Test confirmation of correct user details.
@@ -57,13 +57,16 @@ class MyTestCase(unittest.TestCase):
         text_capture = StringIO()
         sys.stdout = text_capture
 
-        RegistrationStation.find_username('bootcampers.txt')
-        RegistrationStation.correct_or_incorrect()
+        file_data = read_file("bootcampers.txt")
+        find_username(file_data, "elomkhDBN2022")
+        result = correct_or_incorrect()
+
         self.assertEqual(
-            "Select username: 4 April - Johannesburg Physical - No prior experience\n"
-            "Is this correct? (Y/n): ",
-            text_capture.getvalue()
+                text_capture.getvalue(),
+                "4 April - Johannesburg Physical - No prior experience\n"
+                "Are these details correct? (y/n): \n"
         )
+        self.assertEqual(result, "correct")
 
 
     @patch("sys.stdin", StringIO("elonkhDBN2022\nelomkhDBN2022\ny\n"))

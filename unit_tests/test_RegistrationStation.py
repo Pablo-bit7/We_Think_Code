@@ -69,22 +69,24 @@ class MyTestCase(unittest.TestCase):
         self.assertEqual(result, "correct")
 
 
-    @patch("sys.stdin", StringIO("elonkhDBN2022\nelomkhDBN2022\ny\n"))
-    def test_valid_confirmation_invalid_username(self):
+    @patch("sys.stdin", StringIO("n"))
+    def test_invalid_confirmation(self):
         """
         Test valid confirmation after correcting an invalid username.
         """
         text_capture = StringIO()
         sys.stdout = text_capture
 
-        RegistrationStation.find_username('bootcampers.txt')
-        RegistrationStation.correct_or_incorrect()
+        file_data = read_file("bootcampers.txt")
+        find_username(file_data, "elomkhDBN2022")
+        result = correct_or_incorrect()
+
         self.assertEqual(
-            "Select username: Please enter valid existing username\n"
-            "Select username: 4 April - Johannesburg Physical - No prior experience\n"
-            "Is this correct? (Y/n): ",
-            text_capture.getvalue()
+                text_capture.getvalue(),
+                "4 April - Johannesburg Physical - No prior experience\n"
+                "Are these details correct? (y/n): \n"
         )
+        self.assertEqual(result, "incorrect")
 
 
     @patch("sys.stdin", StringIO("elomkhDBN2022\nn\n"))

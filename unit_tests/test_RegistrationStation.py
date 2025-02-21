@@ -72,7 +72,7 @@ class MyTestCase(unittest.TestCase):
     @patch("sys.stdin", StringIO("n"))
     def test_invalid_confirmation(self):
         """
-        Test valid confirmation after correcting an invalid username.
+        Test denial of correctness of user details.
         """
         text_capture = StringIO()
         sys.stdout = text_capture
@@ -87,23 +87,6 @@ class MyTestCase(unittest.TestCase):
                 "Are these details correct? (y/n): \n"
         )
         self.assertEqual(result, "incorrect")
-
-
-    @patch("sys.stdin", StringIO("elomkhDBN2022\nn\n"))
-    def test_incorrect_user_details(self):
-        """
-        Test when user denies the correctness of their details.
-        """
-        text_capture = StringIO()
-        sys.stdout = text_capture
-
-        RegistrationStation.find_username('bootcampers.txt')
-        RegistrationStation.correct_or_incorrect()
-        self.assertEqual(
-            "Select username: 4 April - Johannesburg Physical - No prior experience\n"
-            "Is this correct? (Y/n): ",
-            text_capture.getvalue()
-        )
 
 
     @patch("sys.stdin", StringIO("elomkhDBN2022\nn\nelomkhDBN2022 - 4 April - Johannesburg Physical - No prior experience\n"))

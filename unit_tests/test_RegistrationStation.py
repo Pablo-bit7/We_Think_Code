@@ -89,21 +89,28 @@ class MyTestCase(unittest.TestCase):
         self.assertEqual(result, "incorrect")
 
 
-    @patch("sys.stdin", StringIO("elomkhDBN2022\nn\nelomkhDBN2022 - 4 April - Johannesburg Physical - No prior experience\n"))
-    def test_incorrect_user_details_corrected(self):
+    @patch("sys.stdin", StringIO("n\n4 April - Johannesburg Physical - No prior experience\n"))
+    def test_correction_with_valid_user_details(self):
         """
-        Test correction of incorrect user details.
+        Test correction with correctly formated user details.
         """
         text_capture = StringIO()
         sys.stdout = text_capture
 
-        RegistrationStation.find_username('bootcampers.txt')
-        RegistrationStation.correct_or_incorrect()
-        RegistrationStation.correct_details()
+        file_data = read_file("bootcampers.txt")
+        find_username(file_data, "llomog2025JHB")
+        correct_or_incorrect()
+        correct_details(file_data, "llomog2025JHB")
+
         self.assertEqual(
-            "Select username: 4 April - Johannesburg Physical - No prior experience\n"
-            "Is this correct? (Y/n): Username - Date - Location - Experience: 4 April - Johannesburg Physical - No prior experience\n""",
-            text_capture.getvalue()
+                text_capture.getvalue(),
+                "4 May - Cape Town Physical - Prior Experience\n"
+                "Are these details correct? (y/n): \n"
+                "Date - Location - Experience: \n"
+        )
+        self.assertEqual(
+                file_data[-1],
+                "llomog2025JHB - 4 April - Johannesburg Physical - No prior experience"
         )
 
 

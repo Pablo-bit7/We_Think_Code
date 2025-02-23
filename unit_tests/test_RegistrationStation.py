@@ -6,6 +6,7 @@ import unittest
 from io import StringIO
 import sys
 from unittest.mock import patch
+import tempfile
 from features.RegistrationStation import *
 
 
@@ -98,6 +99,9 @@ class MyTestCase(unittest.TestCase):
         sys.stdout = text_capture
 
         file_data = read_file("bootcampers.txt")
+        with tempfile.NamedTemporary(mode="w+", delete=False) as temp_file:
+            temp_file.writelines(file_data])
+
         find_username(file_data, "llomog2025JHB")
         correct_or_incorrect()
         correct_details(file_data, "llomog2025JHB")

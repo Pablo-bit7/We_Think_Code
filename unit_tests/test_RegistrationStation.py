@@ -99,8 +99,10 @@ class MyTestCase(unittest.TestCase):
         sys.stdout = text_capture
 
         file_data = read_file("bootcampers.txt")
-        with tempfile.NamedTemporary(mode="w+", delete=False) as temp_file:
-            temp_file.writelines(file_data])
+
+        with tempfile.NamedTemporary(mode="w+", delete=True) as temp_file:
+            temp_file.writelines(file_data)
+            campers = temp_file.name
 
         find_username(file_data, "llomog2025JHB")
         correct_or_incorrect()
@@ -112,10 +114,16 @@ class MyTestCase(unittest.TestCase):
                 "Are these details correct? (y/n): \n"
                 "Date - Location - Experience: \n"
         )
+
+        file_data = read_file("bootcampers.txt")
         self.assertEqual(
                 file_data[-1],
                 "llomog2025JHB - 4 April - Johannesburg Physical - No prior experience"
         )
+
+        orig_data = read_file(campers)
+        with open("bootcampers.txt", "w") as file:
+            file.writelines(orig_data)
 
 
     @patch("sys.stdin", StringIO("colootsJHB2023\nn\ncolootsJHB2023 - 13 May - Johannesburg Physical - No Prior Experience\n"))

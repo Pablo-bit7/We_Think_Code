@@ -90,10 +90,10 @@ class MyTestCase(unittest.TestCase):
         self.assertEqual(result, "incorrect")
 
 
-    @patch("sys.stdin", StringIO("n\n4 April - Johannesburg Physical - No prior experience\n"))
+    @patch("sys.stdin", StringIO("4 April - Johannesburg Physical - No prior experience"))
     def test_correction_with_valid_user_details(self):
         """
-        Test correction with correctly formated user details.
+        Test correction with correctly formatted user details.
         """
         text_capture = StringIO()
         sys.stdout = text_capture
@@ -104,14 +104,9 @@ class MyTestCase(unittest.TestCase):
             temp_file.writelines(file_data)
             campers = temp_file.name
 
-        find_username(file_data, "llomog2025JHB")
-        correct_or_incorrect()
         correct_details(file_data, "llomog2025JHB")
-
         self.assertEqual(
                 text_capture.getvalue(),
-                "4 May - Cape Town Physical - Prior Experience\n"
-                "Are these details correct? (y/n): \n"
                 "Date - Location - Experience: \n"
         )
 
@@ -126,22 +121,37 @@ class MyTestCase(unittest.TestCase):
             file.writelines(orig_data)
 
 
-    @patch("sys.stdin", StringIO("colootsJHB2023\nn\ncolootsJHB2023 - 13 May - Johannesburg Physical - No Prior Experience\n"))
-    def test_incorrect_user_details_corrected_additional(self):
+    @patch("sys.stdin", StringIO("ytctvgh\n14 May - Johannesburg Physical - No Prior Experience"))
+    def test_correction_with_invalid_user_details(self):
         """
-        Test correction of details for a different username.
+        Test correction with incorrectly formatted user details.
         """
         text_capture = StringIO()
         sys.stdout = text_capture
 
-        RegistrationStation.find_username('bootcampers.txt')
-        RegistrationStation.correct_or_incorrect()
-        RegistrationStation.correct_details()
+        file_data = read_file("bootcampers.txt")
+
+        with tempfile.NamedTemporary(mode="w+", delete=True) as temp_file:
+            temp_file.writelines(file_data)
+            campers = temp_file.name
+
+        correct_details(file_data, "colootsJHB2023")
         self.assertEqual(
-            "Select username: 13 May - Johannesburg Physical - No Prior Experience\n"
-            "Is this correct? (Y/n): Username - Date - Location - Experience: 13 May - Johannesburg Physical - No Prior Experience\n",
-            text_capture.getvalue()
+                text_capture.getvalue(),
+                "Date - Location - Experience: \n"
+                "Invalid input.\n"
+                "Date - Location - Experience: \n"
         )
+
+        file_data = read_file("bootcampers.txt")
+        self.assertEqual(
+                file_data[-2],
+                "colootsJHB2023 - 14 May - Johannesburg Physical - No Prior Experience"
+        )
+
+        orig_data = read_file(campers)
+        with open("bootcampers.txt", "w") as file:
+            file.writelines(orig_data)
 
 
     @patch("sys.stdin", StringIO("colootsJHB2023\nn\ncolootsJHB2023 - 13 May - Johannesburg Physical - No Prior Experience\nn\ncolootsJHB2023 - 13 May - Johannesburg Physical - No Prior Experience\ny"))

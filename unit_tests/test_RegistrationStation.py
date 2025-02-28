@@ -121,7 +121,7 @@ class MyTestCase(unittest.TestCase):
             file.writelines(orig_data)
 
 
-    @patch("sys.stdin", StringIO("ytctvgh\n14 May - Johannesburg Physical - No Prior Experience"))
+    @patch("sys.stdin", StringIO("ytvgh\n14/05 - Johannesburg Physical - No Prior Experience\n14 May - Limpopo Physical - No Prior Experience\n14 May - Johannesburg Physical - Not a lot\n14 May - Johannesburg Physical - No Prior Experience"))
     def test_correction_with_invalid_user_details(self):
         """
         Test correction with incorrectly formatted user details.
@@ -141,6 +141,11 @@ class MyTestCase(unittest.TestCase):
                 "Date - Location - Experience: \n"
                 "Invalid input.\n"
                 "Date - Location - Experience: \n"
+                "Invalid Date format. Use `DD Month`.\n"
+                "Date - Location - Experience: \n"
+                "Invalid location.\n"
+                "Date - Location - Experience: \n"
+                "Invalid response for experience. Choose from: `Prior Experience`, `No Prior Experience`.\n"
         )
 
         file_data = read_file("bootcampers.txt")

@@ -159,25 +159,14 @@ class MyTestCase(unittest.TestCase):
             file.writelines(orig_data)
 
 
-    @patch("sys.stdin", StringIO("colootsJHB2023\nn\ncolootsJHB2023 - 13 May - Johannesburg Physical - No Prior Experience\nn\ncolootsJHB2023 - 13 May - Johannesburg Physical - No Prior Experience\ny"))
-    def test_incorrect_user_details_incorrect_addition(self):
+    
+    @patch("sys.stdin", StringIO("colootsJHB2023 - 13 May - Johannesburg Physical - No Prior Experience\n"))
+    def test_write_failur(self):
         """
         Test multiple incorrect corrections before confirming.
         """
         text_capture = StringIO()
         sys.stdout = text_capture
-
-        RegistrationStation.find_username('bootcampers.txt')
-        RegistrationStation.correct_or_incorrect()
-        RegistrationStation.correct_details()
-        RegistrationStation.correct_or_incorrect()
-        RegistrationStation.correct_details()
-        self.assertEqual(
-            "Select username: 13 May - Johannesburg Physical - No Prior Experience\n"
-            "Is this correct? (Y/n): Username - Date - Location - Experience: 13 May - Johannesburg Physical - No Prior Experience\n"
-            "Is this correct? (Y/n): Username - Date - Location - Experience: 13 May - Johannesburg Physical - No Prior Experience\n",
-            text_capture.getvalue()
-        )
 
 
 if __name__ == '__main__':

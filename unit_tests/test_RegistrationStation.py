@@ -34,8 +34,8 @@ class MyTestCase(unittest.TestCase):
         result = find_username(file_data, "elomkhDBN2022")
 
         self.assertEqual(
-                text_capture.getvalue(),
-                "4 April - Johannesburg Physical - No prior experience\n"
+                "4 April - Johannesburg Physical - No prior experience\n",
+                text_capture.getvalue()
         )
         self.assertTrue(result)
 
@@ -63,11 +63,11 @@ class MyTestCase(unittest.TestCase):
         result = correct_or_incorrect()
 
         self.assertEqual(
-                text_capture.getvalue(),
                 "4 April - Johannesburg Physical - No prior experience\n"
-                "Are these details correct? (y/n): \n"
+                "Are these details correct? (y/n): \n",
+                text_capture.getvalue()
         )
-        self.assertEqual(result, "correct")
+        self.assertEqual("correct", result)
 
 
     @patch("sys.stdin", StringIO("n"))
@@ -83,11 +83,11 @@ class MyTestCase(unittest.TestCase):
         result = correct_or_incorrect()
 
         self.assertEqual(
-                text_capture.getvalue(),
                 "4 April - Johannesburg Physical - No prior experience\n"
-                "Are these details correct? (y/n): \n"
+                "Are these details correct? (y/n): \n",
+                text_capture.getvalue()
         )
-        self.assertEqual(result, "incorrect")
+        self.assertEqual("incorrect", result)
 
 
     @patch("sys.stdin", StringIO("4 April - Johannesburg Physical - No prior experience"))
@@ -106,14 +106,14 @@ class MyTestCase(unittest.TestCase):
 
         correct_details(file_data, "llomog2025JHB")
         self.assertEqual(
-                text_capture.getvalue(),
-                "Date - Location - Experience: \n"
+                "Date - Location - Experience: \n",
+                text_capture.getvalue()
         )
 
         file_data = read_file("bootcampers.txt")
         self.assertEqual(
-                file_data[-1],
-                "llomog2025JHB - 4 April - Johannesburg Physical - No prior experience"
+                "llomog2025JHB - 4 April - Johannesburg Physical - No prior experience",
+                file_data[-1]
         )
 
         orig_data = read_file(campers)
@@ -121,7 +121,13 @@ class MyTestCase(unittest.TestCase):
             file.writelines(orig_data)
 
 
-    @patch("sys.stdin", StringIO("ytvgh\n14/05 - Johannesburg Physical - No Prior Experience\n14 May - Limpopo Physical - No Prior Experience\n14 May - Johannesburg Physical - Not a lot\n14 May - Johannesburg Physical - No Prior Experience"))
+    @patch("sys.stdin", StringIO(
+        "ytvgh\n"
+        "14/05 - Johannesburg Physical - No Prior Experience\n"
+        "14 May - Limpopo Physical - No Prior Experience\n"
+        "14 May - Johannesburg Physical - Not a lot\n"
+        "14 May - Johannesburg Physical - No Prior Experience"
+    ))
     def test_correction_with_invalid_user_details(self):
         """
         Test correction with incorrectly formatted user details.
@@ -137,7 +143,6 @@ class MyTestCase(unittest.TestCase):
 
         correct_details(file_data, "colootsJHB2023")
         self.assertEqual(
-                text_capture.getvalue(),
                 "Date - Location - Experience: \n"
                 "Invalid input.\n"
                 "Date - Location - Experience: \n"
@@ -145,13 +150,14 @@ class MyTestCase(unittest.TestCase):
                 "Date - Location - Experience: \n"
                 "Invalid location.\n"
                 "Date - Location - Experience: \n"
-                "Invalid response for experience. Choose from: `Prior Experience`, `No Prior Experience`.\n"
+                "Invalid response for experience. Choose from: `Prior Experience`, `No Prior Experience`.\n",
+                text_capture.getvalue()
         )
 
         file_data = read_file("bootcampers.txt")
         self.assertEqual(
-                file_data[-2],
-                "colootsJHB2023 - 14 May - Johannesburg Physical - No Prior Experience"
+                "colootsJHB2023 - 14 May - Johannesburg Physical - No Prior Experience",
+                file_data[-2]
         )
 
         orig_data = read_file(campers)
@@ -159,14 +165,22 @@ class MyTestCase(unittest.TestCase):
             file.writelines(orig_data)
 
 
-    
-    @patch("sys.stdin", StringIO("colootsJHB2023 - 13 May - Johannesburg Physical - No Prior Experience\n"))
-    def test_write_failur(self):
+    @patch("features.RegistrationStation.open", side_effect=IOError("Write error"))
+    @patch("sys.stdin", StringIO("colootsJHB2023 - 13 May - Johannesburg Physical - No Prior Experience"))
+    def test_write_failur(self, mock_open):
         """
-        Test multiple incorrect corrections before confirming.
+        Test file write failur in correct_details().
         """
         text_capture = StringIO()
         sys.stdout = text_capture
+
+        file_data = read_file("bootcampers.txt")
+        correct_details(file_data, "colootsJHB2023")
+
+        self.assertEqual(
+                "Error: Could not write to file.\n",
+                text_capure.getvalue()
+        )
 
 
 if __name__ == '__main__':

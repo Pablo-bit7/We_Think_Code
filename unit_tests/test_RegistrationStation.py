@@ -100,7 +100,7 @@ class MyTestCase(unittest.TestCase):
 
         file_data = read_file("bootcampers.txt")
 
-        with tempfile.NamedTemporary(mode="w+", delete=True) as temp_file:
+        with tempfile.NamedTemporary(mode="w+", delete=False) as temp_file:
             temp_file.writelines(file_data)
             campers = temp_file.name
 
@@ -137,7 +137,7 @@ class MyTestCase(unittest.TestCase):
 
         file_data = read_file("bootcampers.txt")
 
-        with tempfile.NamedTemporary(mode="w+", delete=True) as temp_file:
+        with tempfile.NamedTemporary(mode="w+", delete=False) as temp_file:
             temp_file.writelines(file_data)
             campers = temp_file.name
 
@@ -165,11 +165,11 @@ class MyTestCase(unittest.TestCase):
             file.writelines(orig_data)
 
 
-    @patch("features.RegistrationStation.open", side_effect=IOError("Write error"))
+    @patch("features.RegistrationStation.open", create=True, side_effect=IOError("Write error"))
     @patch("sys.stdin", StringIO("colootsJHB2023 - 13 May - Johannesburg Physical - No Prior Experience"))
-    def test_write_failur(self, mock_open):
+    def test_write_failure(self, mock_open):
         """
-        Test file write failur in correct_details().
+        Test file write failure in correct_details().
         """
         text_capture = StringIO()
         sys.stdout = text_capture
@@ -179,7 +179,7 @@ class MyTestCase(unittest.TestCase):
 
         self.assertEqual(
                 "Error: Could not write to file.\n",
-                text_capure.getvalue()
+                text_capture.getvalue()
         )
 
 

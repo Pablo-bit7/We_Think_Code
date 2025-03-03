@@ -5,7 +5,7 @@ Unit tests for the Registration Station.
 import unittest
 from io import StringIO
 import sys
-from unittest.mock import patch
+from unittest.mock import patch, mock_open
 import tempfile
 from features.RegistrationStation import *
 
@@ -18,24 +18,29 @@ class MyTestCase(unittest.TestCase):
 
     def setUp(self):
         """
-        Helper function ensures sys.stdout is restored after each test
+        Set up test environment.
         """
-        self.addCleanup(lambda: setattr(sys, "stdout", sys.__stdout__))
+        self.text_capture = SrtingIO()
+        sys.stdout = self.text_capture
+
+
+    def tearDown(self):
+        """
+        Restore stdout after each test.
+        """
+        sys.stdout = sys.__stdout__
 
 
     def test_valid_username(self):
         """
         Test valid username input.
         """
-        text_capture = StringIO()
-        sys.stdout = text_capture
-
         file_data = read_file("bootcampers.txt")
         result = find_username(file_data, "elomkhDBN2022")
 
         self.assertEqual(
                 "4 April - Johannesburg Physical - No prior experience\n",
-                text_capture.getvalue()
+                self.text_capture.getvalue()
         )
         self.assertTrue(result)
 
@@ -55,17 +60,11 @@ class MyTestCase(unittest.TestCase):
         """
         Test confirmation of correct user details.
         """
-        text_capture = StringIO()
-        sys.stdout = text_capture
-
-        file_data = read_file("bootcampers.txt")
-        find_username(file_data, "elomkhDBN2022")
         result = correct_or_incorrect()
 
         self.assertEqual(
-                "4 April - Johannesburg Physical - No prior experience\n"
                 "Are these details correct? (y/n): \n",
-                text_capture.getvalue()
+                self.text_capture.getvalue()
         )
         self.assertEqual("correct", result)
 
@@ -75,17 +74,11 @@ class MyTestCase(unittest.TestCase):
         """
         Test denial of correctness of user details.
         """
-        text_capture = StringIO()
-        sys.stdout = text_capture
-
-        file_data = read_file("bootcampers.txt")
-        find_username(file_data, "elomkhDBN2022")
         result = correct_or_incorrect()
 
         self.assertEqual(
-                "4 April - Johannesburg Physical - No prior experience\n"
                 "Are these details correct? (y/n): \n",
-                text_capture.getvalue()
+                self.text_capture.getvalue()
         )
         self.assertEqual("incorrect", result)
 
@@ -95,9 +88,6 @@ class MyTestCase(unittest.TestCase):
         """
         Test correction with correctly formatted user details.
         """
-        text_capture = StringIO()
-        sys.stdout = text_capture
-
         file_data = read_file("bootcampers.txt")
 
         with tempfile.NamedTemporary(mode="w+", delete=False) as temp_file:
@@ -105,12 +95,14 @@ class MyTestCase(unittest.TestCase):
             campers = temp_file.name
 
         correct_details(file_data, "llomog2025JHB")
+
         self.assertEqual(
                 "Date - Location - Experience: \n",
-                text_capture.getvalue()
+                self.text_capture.getvalue()
         )
 
         file_data = read_file("bootcampers.txt")
+
         self.assertEqual(
                 "llomog2025JHB - 4 April - Johannesburg Physical - No prior experience",
                 file_data[-1]
@@ -132,9 +124,6 @@ class MyTestCase(unittest.TestCase):
         """
         Test correction with incorrectly formatted user details.
         """
-        text_capture = StringIO()
-        sys.stdout = text_capture
-
         file_data = read_file("bootcampers.txt")
 
         with tempfile.NamedTemporary(mode="w+", delete=False) as temp_file:
@@ -142,6 +131,7 @@ class MyTestCase(unittest.TestCase):
             campers = temp_file.name
 
         correct_details(file_data, "colootsJHB2023")
+
         self.assertEqual(
                 "Date - Location - Experience: \n"
                 "Invalid input.\n"
@@ -151,10 +141,11 @@ class MyTestCase(unittest.TestCase):
                 "Invalid location.\n"
                 "Date - Location - Experience: \n"
                 "Invalid response for experience. Choose from: `Prior Experience`, `No Prior Experience`.\n",
-                text_capture.getvalue()
+                self.text_capture.getvalue()
         )
 
         file_data = read_file("bootcampers.txt")
+
         self.assertEqual(
                 "colootsJHB2023 - 14 May - Johannesburg Physical - No Prior Experience",
                 file_data[-2]
@@ -165,21 +156,20 @@ class MyTestCase(unittest.TestCase):
             file.writelines(orig_data)
 
 
-    @patch("features.RegistrationStation.open", create=True, side_effect=IOError("Write error"))
+    @patch("features.RegistrationStation.open", new_callable=mock_open)
     @patch("sys.stdin", StringIO("colootsJHB2023 - 13 May - Johannesburg Physical - No Prior Experience"))
-    def test_write_failure(self, mock_open):
+    def test_write_failure(self, mock_file):
         """
         Test file write failure in correct_details().
         """
-        text_capture = StringIO()
-        sys.stdout = text_capture
+        mock_file.side_effect = IOError("rite Error")
 
         file_data = read_file("bootcampers.txt")
         correct_details(file_data, "colootsJHB2023")
 
         self.assertEqual(
                 "Error: Could not write to file.\n",
-                text_capture.getvalue()
+                self.text_capture.getvalue()
         )
 
 

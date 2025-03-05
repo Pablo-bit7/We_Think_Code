@@ -7,11 +7,7 @@ from io import StringIO
 import unittest
 from unittest.mock import patch
 
-from features.UsernameGenerator import (
-    create_user_name,
-    user_campus,
-    user_details,
-)
+from features.UsernameGenerator import *
 
 
 class username_generator_test(unittest.TestCase):

@@ -6,12 +6,12 @@ from datetime import date
 from io import StringIO
 import unittest
 from unittest.mock import patch
-
 from features.UsernameGenerator import *
 
 
 class username_generator_test(unittest.TestCase):
     """Tests for the UsernameGenerator module."""
+
 
     def run_user_details_test(self, inputs, expected_output):
         """
@@ -25,6 +25,7 @@ class username_generator_test(unittest.TestCase):
                 patch("sys.stdout", new_callable=StringIO) as output:
             user_details()
             self.assertEqual(output.getvalue(), expected_output)
+
 
     def test_invalid_name(self):
         """Test invalid input for first name."""
@@ -41,6 +42,7 @@ class username_generator_test(unittest.TestCase):
         )
         self.run_user_details_test(inputs, expected_output)
 
+
     def test_invalid_surname(self):
         """Test invalid input for last name."""
         inputs = ["Lekau", "Mamabo1o", "Mamabolo", "2025", "Cape Town"]
@@ -55,6 +57,7 @@ class username_generator_test(unittest.TestCase):
             # "kaumam2024CPT\n"
         )
         self.run_user_details_test(inputs, expected_output)
+
 
     def test_invalid_cohort(self):
         """Test invalid input for cohort."""
@@ -72,6 +75,7 @@ class username_generator_test(unittest.TestCase):
         )
         self.run_user_details_test(inputs, expected_output)
 
+
     def test_invalid_campus(self):
         """Test invalid input for campus."""
         inputs = ["Sandiselwe", "Zwane", "2026", "Pretoria", "Johannesburg"]
@@ -85,6 +89,7 @@ class username_generator_test(unittest.TestCase):
             # "lwezwa2026JHB\n"
         )
         self.run_user_details_test(inputs, expected_output)
+
 
     def test_empty_first_name(self):
         """Test empty first name."""
@@ -100,11 +105,13 @@ class username_generator_test(unittest.TestCase):
         )
         self.run_user_details_test(inputs, expected_output)
 
+
     def test_name_extractions(self):
         """Test username extraction of name components."""
         username = create_user_name("Zenani", "Zwane", "2025", "DBN")
         self.assertEqual(username[:3], "ani")
         self.assertEqual(username[3:6], "zwa")
+
 
     def test_valid_user_details(self):
         """Test valid user details."""
@@ -119,12 +126,14 @@ class username_generator_test(unittest.TestCase):
         self.assertEqual(int(cohort), date.today().year)
         self.assertIn(final_campus, valid_campuses)
 
+
     def test_campus_abbreviations(self):
         """Test campus abbreviation translations."""
         self.assertEqual(user_campus("johannesburg"), "JHB")
         self.assertEqual(user_campus("cape town"), "CPT")
         self.assertEqual(user_campus("durban"), "DBN")
         self.assertEqual(user_campus("phokeng"), "PHO")
+
 
     @patch("sys.stdin", StringIO("Corban\nLoots\n2025\nDurban"))
     @patch("sys.stdout", new_callable=StringIO)
@@ -145,15 +154,18 @@ class username_generator_test(unittest.TestCase):
         self.assertEqual(mock_stdout.getvalue(), expected_output)
         self.assertEqual(generated_username, "banloo2025DBN")
 
+
     def test_edge_case_campus_abbreviation(self):
         """Test campus abbreviation with mixed casing."""
         self.assertEqual(user_campus("PhOkEnG"), "PHO")
         self.assertEqual(user_campus("CAPe ToWN"), "CPT")
 
+
     def test_edge_case_names(self):
         """Test name extraction with edge cases like short names."""
         username = create_user_name("Al", "Li", "2025", "DBN")
         self.assertEqual(username, "alolio2025DBN")
+
 
     def test_numeric_and_special_name_inputs(self):
         """Test usernames with numeric or special characters in names."""

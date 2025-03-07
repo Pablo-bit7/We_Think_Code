@@ -20,7 +20,7 @@ class MyTestCase(unittest.TestCase):
         """
         Set up test environment.
         """
-        self.text_capture = SrtingIO()
+        self.text_capture = StringIO()
         sys.stdout = self.text_capture
 
 

@@ -90,7 +90,7 @@ class MyTestCase(unittest.TestCase):
         """
         file_data = read_file("bootcampers.txt")
 
-        with tempfile.NamedTemporary(mode="w+", delete=False) as temp_file:
+        with tempfile.NamedTemporaryFile(mode="w+", delete=False) as temp_file:
             temp_file.writelines(file_data)
             campers = temp_file.name
 
@@ -126,7 +126,7 @@ class MyTestCase(unittest.TestCase):
         """
         file_data = read_file("bootcampers.txt")
 
-        with tempfile.NamedTemporary(mode="w+", delete=False) as temp_file:
+        with tempfile.NamedTemporaryFile(mode="w+", delete=False) as temp_file:
             temp_file.writelines(file_data)
             campers = temp_file.name
 

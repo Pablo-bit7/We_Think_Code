@@ -20,6 +20,7 @@ class MyTestCase(unittest.TestCase):
         """
         Set up test environment.
         """
+        self.maxDiff = None
         self.text_capture = StringIO()
         sys.stdout = self.text_capture
 
@@ -104,7 +105,7 @@ class MyTestCase(unittest.TestCase):
         file_data = read_file("bootcampers.txt")
 
         self.assertEqual(
-                "llomog2025JHB - 4 April - Johannesburg Physical - No prior experience",
+                "llomog2025JHB - 4 April - Johannesburg Physical - No prior experience\n",
                 file_data[-1]
         )
 

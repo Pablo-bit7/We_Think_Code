@@ -91,7 +91,7 @@ def correct_details(file_data, user_name):
 
         if user_name in line:
 
-            # <<< --- ADD THESE DEBUG PRINTS --- >>>
+            # <<< --- DEBUG PRINT --- >>>
             user_found_in_loop = True
             print(f"SUCCESS: Found user '{user_name}' in line {i}. Entering correction loop.")
             # <<< --- END OF DEBUG PRINTS --- >>>
@@ -126,12 +126,12 @@ def correct_details(file_data, user_name):
                 file_data[i] = updated_line
                 break
 
-            # <<< --- ADD THIS DEBUG PRINT --- >>>
+            # <<< --- DEBUG PRINT --- >>>
             print("SUCCESS: Breaking from outer for loop.")
             break # break from outer for loop
             # <<< --- END OF DEBUG PRINT --- >>>
 
-    # <<< --- ADD THIS DEBUG PRINT --- >>>
+    # <<< --- DEBUG PRINT --- >>>
     if not user_found_in_loop:
         print("FAILURE: Loop finished but user was never found.")
     print("----------------------------------\n")
@@ -152,7 +152,9 @@ def find_username(file_data, user_name):
     """
     for line in file_data:
         if user_name in line:
-            print(line.strip())
+            parts = line.strip().split(" - ")
+            details = parts[1:]
+            print(' - '.join(details))
             return (True)
 
     return (False)

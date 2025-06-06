@@ -119,13 +119,22 @@ class MyTestCase(unittest.TestCase):
         "14/05 - Johannesburg Physical - No Prior Experience\n"
         "14 May - Limpopo Physical - No Prior Experience\n"
         "14 May - Johannesburg Physical - Not a lot\n"
-        "14 May - Johannesburg Physical - No Prior Experience"
+        "14 May - Johannesburg Physical - No Prior Experience\n"
     ))
     def test_correction_with_invalid_user_details(self):
         """
         Test correction with incorrectly formatted user details.
         """
         file_data = read_file("bootcampers.txt")
+
+        # <<< --- DEBUG PRINTS --- >>>
+        print("\n--- DEBUG FROM TEST ---")
+        print(f"read_file returned {len(file_data)} lines.")
+        if file_data:
+            print("First line of file_data:", repr(file_data[0])) # repr() shows hidden characters
+            print("Last line of file_data:", repr(file_data[-1]))
+        print("-----------------------\n")
+        # <<< --- END OF DEBUG PRINTS --- >>>
 
         with tempfile.NamedTemporaryFile(mode="w+", delete=False) as temp_file:
             temp_file.writelines(file_data)
@@ -135,7 +144,7 @@ class MyTestCase(unittest.TestCase):
 
         self.assertEqual(
                 "Date - Location - Experience: \n"
-                "Invalid input.\n"
+                "Invalid input or format.\n"
                 "Date - Location - Experience: \n"
                 "Invalid Date format. Use `DD Month`.\n"
                 "Date - Location - Experience: \n"
@@ -163,13 +172,13 @@ class MyTestCase(unittest.TestCase):
         """
         Test file write failure in correct_details().
         """
-        mock_file.side_effect = IOError("rite Error")
+        mock_file.side_effect = IOError("Write Error")
 
         file_data = read_file("bootcampers.txt")
         correct_details(file_data, "colootsJHB2023")
 
         self.assertEqual(
-                "Error: Could not write to file.\n",
+                "Error: Could not write to file.",
                 self.text_capture.getvalue()
         )
 

@@ -49,7 +49,7 @@ def correct_or_incorrect():
     Prompt to ask if details are correct or not
     """
     while True:
-        answer = input("Are these details correct? (y/n):\n").strip().lower()
+        answer = input("Are these details correct? (y/n): \n").strip().lower()
         if not answer:
             print("Invalid response")
         elif answer == "y":
@@ -74,16 +74,34 @@ def correct_details(file_data, user_name):
         "Phokeng Physical", "Phokeng Virtual"
     }
 
-    valid_experience = {"Prior Experience", "No Prior Experience"}
+    valid_experience = {"`Prior Experience`", "`No Prior Experience`"}
+
+    # <<< --- DEBUG PRINTS --- >>>
+    print("\n--- DEBUG FROM correct_details ---")
+    print(f"Function received user: '{user_name}'")
+    print(f"Function received file_data with {len(file_data)} lines.")
+    user_found_in_loop = False
+    # <<< --- END OF DEBUG PRINTS --- >>>
 
     for i, line in enumerate(file_data):
+
+        # <<< --- DEBUG PRINT --- >>>
+        print(f"Looping: Checking line {i}: {repr(line)}")
+        # <<< --- END OF DEBUG PRINT --- >>>
+
         if user_name in line:
+
+            # <<< --- ADD THESE DEBUG PRINTS --- >>>
+            user_found_in_loop = True
+            print(f"SUCCESS: Found user '{user_name}' in line {i}. Entering correction loop.")
+            # <<< --- END OF DEBUG PRINTS --- >>>
+
             while True:
                 corrected_details = input("Date - Location - Experience: \n")
 
                 parts = corrected_details.split(" - ")
                 if len(parts) != 3:
-                    print("Invalid format.")
+                    print("Invalid input or format.\n")
                     continue
 
                 date, location, experience = parts
@@ -93,11 +111,11 @@ def correct_details(file_data, user_name):
                     r"(January|February|March|April|May|June|July|August|September|October|November|December)$"
                 )
                 if not re.match(date_pattern, date):
-                    print("Invalid date format. Use 'DD Month'.")
+                    print("Invalid date format. Use `DD Month`.")
                     continue
 
                 if location.title() not in valid_locations:
-                    print(f"Invalid location. Choose from: {', '.join(valid_locations)}")
+                    print(f"Invalid location.") # Choose from: {', '.join(valid_locations)}
                     continue
 
                 if experience.title() not in valid_experience:
@@ -107,6 +125,17 @@ def correct_details(file_data, user_name):
                 updated_line = f"{user_name} - {corrected_details}\n"
                 file_data[i] = updated_line
                 break
+
+            # <<< --- ADD THIS DEBUG PRINT --- >>>
+            print("SUCCESS: Breaking from outer for loop.")
+            break # break from outer for loop
+            # <<< --- END OF DEBUG PRINT --- >>>
+
+    # <<< --- ADD THIS DEBUG PRINT --- >>>
+    if not user_found_in_loop:
+        print("FAILURE: Loop finished but user was never found.")
+    print("----------------------------------\n")
+    # <<< --- END OF DEBUG PRINTS --- >>>
 
     try:
         with open("bootcampers.txt", "w") as file:

@@ -127,15 +127,6 @@ class MyTestCase(unittest.TestCase):
         """
         file_data = read_file("bootcampers.txt")
 
-        # <<< --- DEBUG PRINTS --- >>>
-        print("\n--- DEBUG FROM TEST ---")
-        print(f"read_file returned {len(file_data)} lines.")
-        if file_data:
-            print("First line of file_data:", repr(file_data[0])) # repr() shows hidden characters
-            print("Last line of file_data:", repr(file_data[-1]))
-        print("-----------------------\n")
-        # <<< --- END OF DEBUG PRINTS --- >>>
-
         with tempfile.NamedTemporaryFile(mode="w+", delete=False) as temp_file:
             temp_file.writelines(file_data)
             campers = temp_file.name

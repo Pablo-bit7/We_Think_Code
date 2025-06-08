@@ -74,32 +74,14 @@ def correct_details(file_data, user_name):
         "Phokeng Physical", "Phokeng Virtual"
     }
 
-    valid_experience = {"`Prior Experience`", "`No Prior Experience`"}
-
-    # <<< --- DEBUG PRINTS --- >>>
-    print("\n--- DEBUG FROM correct_details ---")
-    print(f"Function received user: '{user_name}'")
-    print(f"Function received file_data with {len(file_data)} lines.")
-    user_found_in_loop = False
-    # <<< --- END OF DEBUG PRINTS --- >>>
+    valid_experience = {"Prior Experience", "No Prior Experience"}
 
     for i, line in enumerate(file_data):
-
-        # <<< --- DEBUG PRINT --- >>>
-        print(f"Looping: Checking line {i}: {repr(line)}")
-        # <<< --- END OF DEBUG PRINT --- >>>
-
         if user_name in line:
-
-            # <<< --- DEBUG PRINT --- >>>
-            user_found_in_loop = True
-            print(f"SUCCESS: Found user '{user_name}' in line {i}. Entering correction loop.")
-            # <<< --- END OF DEBUG PRINTS --- >>>
-
             while True:
                 corrected_details = input("Date - Location - Experience: \n")
 
-                parts = corrected_details.split(" - ")
+                parts = [part.strip() for part in corrected_details.split(" - ")]
                 if len(parts) != 3:
                     print("Invalid input or format.\n")
                     continue
@@ -126,16 +108,7 @@ def correct_details(file_data, user_name):
                 file_data[i] = updated_line
                 break
 
-            # <<< --- DEBUG PRINT --- >>>
-            print("SUCCESS: Breaking from outer for loop.")
-            break # break from outer for loop
-            # <<< --- END OF DEBUG PRINT --- >>>
-
-    # <<< --- DEBUG PRINT --- >>>
-    if not user_found_in_loop:
-        print("FAILURE: Loop finished but user was never found.")
-    print("----------------------------------\n")
-    # <<< --- END OF DEBUG PRINTS --- >>>
+            break
 
     try:
         with open("bootcampers.txt", "w") as file:

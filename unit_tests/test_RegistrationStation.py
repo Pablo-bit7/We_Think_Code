@@ -137,18 +137,19 @@ class MyTestCase(unittest.TestCase):
                 "Date - Location - Experience: \n"
                 "Invalid input or format.\n"
                 "Date - Location - Experience: \n"
-                "Invalid Date format. Use `DD Month`.\n"
+                "Invalid date format. Use `DD Month`.\n"
                 "Date - Location - Experience: \n"
                 "Invalid location.\n"
                 "Date - Location - Experience: \n"
-                "Invalid response for experience. Choose from: `Prior Experience`, `No Prior Experience`.\n",
+                "Invalid response for experience. Choose from: Prior Experience, No Prior Experience.\n"
+                "Date - Location - Experience: \n",
                 self.text_capture.getvalue()
         )
 
         file_data = read_file("bootcampers.txt")
 
         self.assertEqual(
-                "colootsJHB2023 - 14 May - Johannesburg Physical - No Prior Experience",
+                "colootsJHB2023 - 14 May - Johannesburg Physical - No Prior Experience\n",
                 file_data[-2]
         )
 

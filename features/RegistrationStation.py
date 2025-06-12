@@ -74,7 +74,7 @@ def correct_details(file_data, user_name):
         "Phokeng Physical", "Phokeng Virtual"
     }
 
-    valid_experience = {"Prior Experience", "No Prior Experience"}
+    valid_experience = ["Prior Experience", "No Prior Experience"]
 
     for i, line in enumerate(file_data):
         if user_name in line:
@@ -83,7 +83,7 @@ def correct_details(file_data, user_name):
 
                 parts = [part.strip() for part in corrected_details.split(" - ")]
                 if len(parts) != 3:
-                    print("Invalid input or format.\n")
+                    print("Invalid input or format.")
                     continue
 
                 date, location, experience = parts
@@ -101,7 +101,7 @@ def correct_details(file_data, user_name):
                     continue
 
                 if experience.title() not in valid_experience:
-                    print(f"Invalid response for experience. Choose from: {', '.join(valid_experience)}")
+                    print(f"Invalid response for experience. Choose from: {', '.join(valid_experience)}.")
                     continue
 
                 updated_line = f"{user_name} - {corrected_details}\n"
@@ -149,12 +149,3 @@ if __name__ == "__main__":
 
     else:
         print(f"The user {user_name} does not exist.")
-
-
-#    while True:
-#        answer = correct_or_incorrect()
-#        if answer == "correct":
-#            print(information)
-#            break
-#        else:
-#            correct_details()

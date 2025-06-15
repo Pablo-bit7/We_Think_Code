@@ -11,6 +11,7 @@ A breakdown of the revisions made to the unit test files in `We_Think_Code/unit_
 |--------------------|-------------------------------------------|-------------------------------------------------------------------------------|------------------------------------------------------------|
 | `test_UsernameGenerator.py` | EOF errors, improper mocking              | Refactored input/output mocking; helper function added for consistency       | Tests for invalid input and boundary conditions            |
 | `test_team_allocator.py` | Poor readability, failing tests due to incorrect expectations | Refactored code to follow PEP 8 standards | Enhanced readability and consistency in test data |
+| `test_RegistrationStation.py` | Multiple failures: improper patching, newline mismatches, file I/O coupling, and missing edge case tests | Replaced `read_file()` with direct `file_data`, patched only file writes, ensured newline match, validated input parsing | `test_write_failure()`, invalid correction input coverage, input-loop validation feedback, assert file unchanged on error |
 
 ---
 

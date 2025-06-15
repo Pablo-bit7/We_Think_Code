@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#!/usr/bin/env python3
 """
 Unit tests for the Registration Station.
 """
@@ -159,18 +159,19 @@ class MyTestCase(unittest.TestCase):
 
 
     @patch("features.RegistrationStation.open", new_callable=mock_open)
-    @patch("sys.stdin", StringIO("colootsJHB2023 - 13 May - Johannesburg Physical - No Prior Experience"))
-    def test_write_failure(self, mock_file):
+    @patch("sys.stdin", StringIO("13 May - Johannesburg Physical - No Prior Experience"))
+    def test_write_failure(self, mock_open):
         """
         Test file write failure in correct_details().
         """
-        mock_file.side_effect = IOError("Write Error")
+        mock_open.side_effect = IOError("Write Error")
 
-        file_data = read_file("bootcampers.txt")
+        file_data = ["colootsJHB2023 - 12 June - Johannesburg Virtual - No Prior Experience\n"]
         correct_details(file_data, "colootsJHB2023")
 
         self.assertEqual(
-                "Error: Could not write to file.",
+                "Date - Location - Experience: \n"
+                "Error: Could not write to file.\n",
                 self.text_capture.getvalue()
         )
 

@@ -1,12 +1,19 @@
-
+#!/usr/bin/env python3
+"""
+Unit tests for the Exercise Marker.
+"""
 import unittest
 import sys
 import re
-from bootcamp_exercise_marker import *
+from features.bootcamp_exercise_marker import *
 from unittest.mock import patch
 from io import StringIO as sio
 
+
 class BootcampExerciseMarkerTest(unittest.TestCase):
+    """
+    Test cases for validating the Exercise Marker feature.
+    """
 
     @patch("sys.stdin", sio(""))
     def test_display_question_answer(self):

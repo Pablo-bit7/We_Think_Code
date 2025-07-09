@@ -15,6 +15,21 @@ class BootcampExerciseMarkerTest(unittest.TestCase):
     Test cases for validating the Exercise Marker feature.
     """
 
+
+    def setUp(self):
+        """
+        Set up test environment.
+        """
+        self.maxDiff = None
+        self.text_capture = StringIO()
+        sys.stdout = self.text_capture
+
+    def tearDown(self):
+        """
+        Restore stdout after each test.
+        """
+        sys.stdout = sys.__stdout__
+
     @patch("sys.stdin", StringIO(""))
     def test_display_question_answer(self):
         """

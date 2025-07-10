@@ -32,15 +32,12 @@ class BootcampExerciseMarkerTest(unittest.TestCase):
         sys.stdout = sys.__stdout__
 
 
-    @patch("sys.stdin", StringIO(""))
+    @patch("sys.stdin", StringIO("A\n"))
     def test_display_question_answer(self):
         """
         Testing std out- and input of one question 
         """
         question = ['How many leaves are in a tree?, C, A - 23, B - 45, C - 78']
-    
-        output = StringIO()
-        sys.stdout = output
 
         answer = display_question(question)
 
@@ -52,7 +49,7 @@ class BootcampExerciseMarkerTest(unittest.TestCase):
             "A - 23\n"
             "B - 45\n"
             "C - 78\n",
-            output.getvalue()
+            self.text_capture.getvalue()
         )
         
         

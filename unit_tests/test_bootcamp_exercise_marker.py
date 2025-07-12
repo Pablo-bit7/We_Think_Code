@@ -10,6 +10,13 @@ from unittest.mock import patch
 from io import StringIO
 
 
+MOCK_QUESTION = {
+    'question': 'How many leaves are in a tree?',
+    "options": ["23", "45", "78"],
+    'answer': 'C',
+}
+
+
 class BootcampExerciseMarkerTest(unittest.TestCase):
     """
     Test cases for validating the Exercise Marker feature.
@@ -37,13 +44,11 @@ class BootcampExerciseMarkerTest(unittest.TestCase):
         """
         Testing std out- and input of one question 
         """
-        question = ['How many leaves are in a tree?, C, A - 23, B - 45, C - 78']
+        user_answer = display_question(MOCK_QUESTION, 1)
 
-        answer = display_question(question)
-
-        self.assertTrue(type(str, answer))
-        self.assertEqual(1, len(answer))
-        self.assertTrue(re.match("[A-C]", answer))
+        self.assertIsInstance(user_answer, str)
+        self.assertEqual(1, len(user_answer))
+        self.assertTrue(re.match("[A-C]", user_answer))
         self.assertEqual(
             "1. How many leaves are in a tree?\n"
             "A - 23\n"

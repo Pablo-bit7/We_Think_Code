@@ -4,16 +4,15 @@ Unit tests for the Exercise Marker.
 """
 import unittest
 import sys
-import re
 from features.bootcamp_exercise_marker import *
 from unittest.mock import patch
 from io import StringIO
 
 
 MOCK_QUESTION = {
-    'question': 'How many leaves are in a tree?',
+    "question": "How many leaves are in a tree?",
     "options": ["23", "45", "78"],
-    'answer': 'C',
+    "answer": "B",
 }
 
 
@@ -39,7 +38,7 @@ class BootcampExerciseMarkerTest(unittest.TestCase):
         sys.stdout = sys.__stdout__
 
 
-    @patch("sys.stdin", StringIO("A\n"))
+    @patch("sys.stdin", StringIO("B\n"))
     def test_display_question_answer(self):
         """
         Testing std out- and input of one question 
@@ -47,8 +46,7 @@ class BootcampExerciseMarkerTest(unittest.TestCase):
         user_answer = display_question(MOCK_QUESTION, 1)
 
         self.assertIsInstance(user_answer, str)
-        self.assertEqual(1, len(user_answer))
-        self.assertTrue(re.match("[A-C]", user_answer))
+        self.assertEqual(user_answer, "B")
         self.assertEqual(
             "1. How many leaves are in a tree?\n"
             "A - 23\n"
@@ -62,11 +60,21 @@ class BootcampExerciseMarkerTest(unittest.TestCase):
         """
         Testing that read_file() returns only a list
         """
-        self.assertTrue(len(read_file() == 5))
-        self.assertFalse(len(read_file() >= 5))
-        self.assertFalse(len(read_file() <= 5))
-        self.assertFalse(len(read_file() == None))
-        self.assertTrue(type(list, read_file()))
+        question_bank = read_file()
+    
+        self.assertIsInstance(question_bank, list)
+        self.assertTrue(len(question_bank) > 0)
+
+        first_question = question_bank[0]
+
+        self.assertIsInstance(first_question, dict)
+        self.assertIn("question", first_question)
+        self.assertIn("options", first_question)
+        self.assertIn("answer", first_question)
+    
+        self.assertIsInstance(first_question["question"], str)
+        self.assertIsInstance(first_question["options"], list)
+        self.assertIsInstance(first_question["answer"], str)
     
     
     def test_is_correct_answer(self):

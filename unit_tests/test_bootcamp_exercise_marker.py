@@ -81,13 +81,11 @@ class BootcampExerciseMarkerTest(unittest.TestCase):
         """
         Testing that only True and False is returned by is_correct_answer()
         """
-        self.assertTrue(is_correct_answer('A', 'A'))
-        self.assertTrue(is_correct_answer('C', 'C'))
-        self.assertFalse(is_correct_answer('A', 'a'))
-        self.assertFalse(is_correct_answer('B', 'b'))
-        self.assertFalse(is_correct_answer('A', '1'))
-        self.assertFalse(is_correct_answer('A', 1))
-        self.assertTrue(type(bool, is_correct_answer('A', 'A')))
+        self.assertTrue(is_correct_answer(MOCK_QUESTION, "B"))
+        self.assertTrue(is_correct_answer(MOCK_QUESTION, "b"))
+        self.assertFalse(is_correct_answer(MOCK_QUESTION, "C"))
+        self.assertFalse(is_correct_answer(MOCK_QUESTION, "c"))
+        self.assertIsInstance(is_correct_answer(MOCK_QUESTION, "B"), bool)
     
     
     def test_next_round(self):

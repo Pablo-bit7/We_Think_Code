@@ -15,6 +15,14 @@ MOCK_QUESTION = {
     "answer": "B",
 }
 
+MOCK_QUESTION_BANK = [
+    {"question": "Q1", "options": ["A", "B", "C"], "answer": "A"},
+    {"question": "Q2", "options": ["A", "B", "C"], "answer": "B"},
+    {"question": "Q3", "options": ["A", "B", "C"], "answer": "C"},
+    {"question": "Q4", "options": ["A", "B", "C"], "answer": "A"},
+    {"question": "Q5", "options": ["A", "B", "C"], "answer": "B"}
+]
+
 
 class BootcampExerciseMarkerTest(unittest.TestCase):
     """
@@ -88,14 +96,16 @@ class BootcampExerciseMarkerTest(unittest.TestCase):
         self.assertIsInstance(is_correct_answer(MOCK_QUESTION, "B"), bool)
     
     
-    def test_next_round(self):
+    @patch('sys.stdin', StringIO("A\nB\nC\nA\nC\n"))
+    def test_ask_questions(self):
         """
-        Testing that next_round() returns an incremented value
+        Testing that ask_questions() administers a round and returns a list of questions answered incorrectly
         """
-        self.assertEqual(1, next_round(0))
-        self.assertEqual(3, next_round(2))
-        self.assertNotEqual(2, next_round(2))
-        self.assertNotEqual(2, next_round(3))
+        incorrect_answers = ask_questions(MOCK_QUESTION_BANK)
+
+        self.assertIsInstance(incorrect_answers, list)
+        self.assertEqual(len(incorrect_answers), 1)
+        self.assertEqual(incorrect_answers[0]['question'], "Q5")
         
 
 if __name__ == '__main__':

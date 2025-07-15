@@ -1,3 +1,8 @@
+#!/usr/bin/env python3
+"""
+Feature code for a bootcamp exercise marker.
+"""
+
 
 def read_file():
     '''

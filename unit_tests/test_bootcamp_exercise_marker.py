@@ -98,7 +98,7 @@ class BootcampExerciseMarkerTest(unittest.TestCase):
     
     @patch('sys.stdin', StringIO("A\nB\nC\nA\nC\n"))
     def test_ask_questions(self):
-        """
+        """ 
         Testing that ask_questions() administers a round and returns a list of questions answered incorrectly
         """
         incorrect_answers = ask_questions(MOCK_QUESTION_BANK)

@@ -47,7 +47,7 @@ class BootcampExerciseMarkerTest(unittest.TestCase):
 
 
     @patch("sys.stdin", StringIO("B\n"))
-    def test_display_question_answer(self):
+    def test_display_question_answer(self, mock_stdin):
         """
         Testing std out- and input of one question 
         """
@@ -97,7 +97,7 @@ class BootcampExerciseMarkerTest(unittest.TestCase):
     
     
     @patch('sys.stdin', StringIO("A\nB\nC\nA\nC\n"))
-    def test_ask_questions(self):
+    def test_ask_questions(self, mock_stdin):
         """ 
         Testing that ask_questions() administers a round and returns a list of questions answered incorrectly
         """
